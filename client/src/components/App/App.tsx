@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.scss';
 
 function App() {
   return (
-    <div>
-      Init app
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        Init app
+      </div>
     </div>
   );
 }
