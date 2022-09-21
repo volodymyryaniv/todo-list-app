@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import AddNewTodo from '../AddNewTodo';
 import ToDoList from '../ToDoList';
 import styles from './App.module.scss';
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

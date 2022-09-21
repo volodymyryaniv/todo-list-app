@@ -3,12 +3,16 @@
 
 .container {
   .form {
-    .input {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid $mediumText;
-      border-radius: 0.3rem;
-      margin-bottom: 0.5rem;
+    text-align: center;
+    label {
+      @include text(1rem, 700, $buttonHoverColor);
+      .input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid $mediumText;
+        border-radius: 0.3rem;
+        margin: 0.5rem 0;
+      }
     }
     .button {
       width: 100%;

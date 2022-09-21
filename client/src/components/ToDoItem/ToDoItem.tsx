@@ -1,17 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import { ToDoItemTypes } from '../../types';
+import { formatDisplayDate } from '../../services/formatDate';
 import styles from './ToDoItem.module.scss';
 
-const ToDoItem: React.FC<ToDoItemTypes> = ({ text, created, expireUntil }) => {
-  const formatDate = (date: string) => {
-    const arr = date.split('T');
-    const newDate = arr[0].split('-').reverse().join('.');
-    const newTime = arr.at(-1)?.slice(0, 5);
-    return `${newDate} ${newTime}`;
-  };
+const ToDoItem: FC<ToDoItemTypes> = (props) => {
+  const { text, created, expireUntil } = props;
 
-  const formatedCreated = formatDate(created);
-  const formatedExpire = formatDate(expireUntil);
+  const formatedCreated = formatDisplayDate(created);
+  const formatedExpire = formatDisplayDate(expireUntil);
 
   return (
     <article className={styles.container}>
