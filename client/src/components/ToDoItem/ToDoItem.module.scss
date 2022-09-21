@@ -11,17 +11,29 @@
   }
   .mainInfo {
     @include flex(flex-start, center);
+    @media (min-width: 768px) {
+      max-width: 55%;
+    }
     .checkbox {
       margin-right: 0.5rem;
     }
     .text {
       flex: 1 1 auto;
     }
+    .done {
+      color: $doneTaskText;
+      text-decoration: line-through;
+    }
   }
   .details {
+    margin-left: 1.3rem;
     .date {
       @include text(0.8rem, 400, $mediumText);
       margin-right: 1rem;
+    }
+    .done {
+      color: $doneTaskText;
+      text-decoration: line-through;
     }
   }
 }
