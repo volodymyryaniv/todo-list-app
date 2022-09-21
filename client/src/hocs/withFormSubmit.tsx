@@ -15,7 +15,6 @@ export default function withFormSubmit<T>(
 
     const onSubmitHandler = (e: React.SyntheticEvent): void => {
       e.preventDefault();
-      console.log(created);
       dispatch(createTodo(text, created, expire));
       setText('');
       dispatch(setPopup(false));
