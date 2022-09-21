@@ -3,15 +3,10 @@ import { withFormFullPropTypes } from '../../types';
 import styles from './CreateForm.module.scss';
 
 const CreateForm = (
-  props: any,
-  {
-    text,
-    setText,
-    setCreated,
-    setExpire,
-    onSubmit,
-  }: withFormFullPropTypes
+  props: any
 ) => {
+  const { text, setText, setCreated, setExpire, onSubmit } = props;
+
   return (
     <section className={styles.container}>
       <form className={styles.form} onSubmit={onSubmit}>

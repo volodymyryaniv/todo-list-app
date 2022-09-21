@@ -3,13 +3,13 @@ import { setPopup } from '../../redux/slices/popupSlice';
 import withFormSubmit from '../../hocs/withFormSubmit';
 import Popup from '../../modules/Popup';
 import CreateForm from '../../modules/CreateForm';
-import { withFormSimplePropTypes } from '../../types';
 import styles from './AddNewTodo.module.scss';
 
-const QuickCreation: React.FC = (
+const QuickCreation = (
   props: any,
-  { text, setText, onSubmit }: withFormSimplePropTypes
 ) => {
+  const { text, setText, onSubmit } = props;
+
   const open = useAppSelector((state) => state.popupSlice);
   const dispatch = useAppDispatch();
 
