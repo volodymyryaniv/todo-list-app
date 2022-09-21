@@ -1,24 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { setTodoStatus } from '../../redux/slices/todoListSlice';
 import { ToDoItemTypes } from '../../types';
+import { formatDisplayDate } from '../../services/formatDate';
 import styles from './ToDoItem.module.scss';
 
-const ToDoItem: React.FC<ToDoItemTypes> = ({
-  id,
-  text,
-  created,
-  expireUntil,
-  completed,
-}) => {
+const ToDoItem: FC<ToDoItemTypes> = (props) => {
+  const { id, text, created, expireUntil, completed } = props;
   const dispatch = useAppDispatch();
-
-  const formatDate = (date: string): string => {
-    const arr = date.split('T');
-    const newDate = arr[0].split('-').reverse().join('.');
-    const newTime = arr.at(-1)?.slice(0, 5);
-    return `${newDate} ${newTime}`;
-  };
 
   const formatClassNames = (
     status: ToDoItemTypes['completed'],
@@ -27,11 +16,12 @@ const ToDoItem: React.FC<ToDoItemTypes> = ({
     return status ? `${styles[name]} ${styles.done}` : `${styles[name]}`;
   };
 
-  const formatedCreated = formatDate(created);
-  const formatedExpire = formatDate(expireUntil);
+  const formatedCreated = formatDisplayDate(created);
+  const formatedExpire = formatDisplayDate(expireUntil);
 
   const textStyle = formatClassNames(completed, 'text');
   const dateStyle = formatClassNames(completed, 'date');
+  const titleStyle = formatClassNames(completed, 'title');
 
   const onSetStatusHandler = (id: ToDoItemTypes['id']) => {
     dispatch(setTodoStatus(id));
@@ -48,10 +38,16 @@ const ToDoItem: React.FC<ToDoItemTypes> = ({
         />
         <p className={textStyle}>{text}</p>
       </div>
-      <div className={styles.details}>
-        <span className={dateStyle}>{formatedCreated}</span>
-        <span className={dateStyle}>{formatedExpire}</span>
-      </div>
+      <article className={styles.details}>
+        <div className={styles.dateBlock}>
+          <h5 className={titleStyle}>Created</h5>
+          <span className={dateStyle}>{formatedCreated}</span>
+        </div>
+        <div className={styles.dateBlock}>
+          <h5 className={titleStyle}>Expiry</h5>
+          <span className={dateStyle}>{formatedExpire}</span>
+        </div>
+      </article>
     </article>
   );
 };

@@ -26,14 +26,29 @@
     }
   }
   .details {
-    margin-left: 1.3rem;
-    .date {
-      @include text(0.8rem, 400, $mediumText);
-      margin-right: 1rem;
-    }
-    .done {
-      color: $doneTaskText;
-      text-decoration: line-through;
+    @include flex(flex-start, center);
+    margin: 0.2rem 0 0 1.3rem;
+    .dateBlock {
+      @include flex(flex-start, flex-start, column);
+      @media (min-width: 390px) {
+        flex-direction: row;
+        align-items: center;
+      }
+      @media (min-width: 768px) {
+        flex-direction: column;
+      }
+      .title {
+        @include text(0.8rem, 500, $buttonHoverColor);
+        margin-right: 0.5rem;
+      }
+      .date {
+        @include text(0.8rem, 400, $mediumText);
+        margin-right: 0.5rem;
+      }
+      .done {
+        color: $doneTaskText;
+        text-decoration: line-through;
+      }
     }
   }
 }

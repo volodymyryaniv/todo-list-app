@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { setPopup } from '../../redux/slices/popupSlice';
@@ -9,10 +9,10 @@ interface ModalProps {
 }
 
 const Popup = ({ children }: ModalProps) => {
-  const el = React.useRef(document.createElement('div'));
+  const el = useRef(document.createElement('div'));
   const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const element = el.current;
     document.body.appendChild(element);
     return () => void document.body.removeChild(element);
