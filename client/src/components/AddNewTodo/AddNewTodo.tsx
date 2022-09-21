@@ -39,4 +39,5 @@ const QuickCreation = (props: withFormSimplePropTypes) => {
     </>
   );
 };
+
 export default withFormSubmit(QuickCreation);

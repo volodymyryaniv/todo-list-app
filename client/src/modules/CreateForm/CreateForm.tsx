@@ -43,7 +43,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
           />
         </label>
         <label>
-          Expired date
+          Expiry date
           <input
             className={styles.input}
             type="datetime-local"
@@ -60,6 +60,5 @@ const CreateForm = (props: withFormFullPropTypes) => {
     </section>
   );
 };
-
 
 export default withFormSubmit(CreateForm);
