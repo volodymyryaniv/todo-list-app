@@ -1,0 +1,7 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.container {
+  @include text(1.1rem, 400, $darkText);
+  background-color: $lightText;
+}

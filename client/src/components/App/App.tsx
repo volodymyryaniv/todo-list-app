@@ -1,11 +1,15 @@
 import React from 'react';
+import AddNewTodo from '../AddNewTodo';
+import ToDoList from '../ToDoList';
 import styles from './App.module.scss';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        Init app
+        <h1 className={styles.title}>Todo</h1>
+        <AddNewTodo />
+        <ToDoList />
       </div>
     </div>
   );

@@ -1,0 +1,32 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $popupWrapper;
+  @include flex(center, center);
+  .container {
+    @include flex(center, center, column);
+    background-color: $bgColor;
+    padding: 5rem;
+    margin: 1rem;
+    overflow: auto;
+    .button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.4rem;
+      @include text(1.1rem, 700, $buttonHoverColor);
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+      &:hover {
+        background-color: $buttonHoverColor;
+        color: $lightText;
+        transition: all 0.3s ease-in;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.container {
+  padding: 1.1rem 0.8rem;
+  @include flex(center, flex-start, column);
+  flex-wrap: wrap;
+  border-bottom: 2px solid $darkText;
+  @media (min-width: 767px) {
+    @include flex(space-between, center, row);
+  }
+  .mainInfo {
+    @include flex(flex-start, center);
+    .checkbox {
+      margin-right: 0.5rem;
+    }
+    .text {
+      flex: 1 1 auto;
+    }
+  }
+  .details {
+    .date {
+      @include text(0.8rem, 400, $mediumText);
+      margin-right: 1rem;
+    }
+  }
+}
