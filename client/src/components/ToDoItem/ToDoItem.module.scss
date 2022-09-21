@@ -19,9 +19,18 @@
     }
   }
   .details {
-    .date {
-      @include text(0.8rem, 400, $mediumText);
-      margin-right: 1rem;
+    @include flex(flex-start, center);
+    margin-top: 0.2rem;
+    .dateBlock {
+      @include flex(flex-start, center);
+      .title {
+        @include text(0.8rem, 500, $buttonHoverColor);
+        margin-right: 0.5rem;
+      }
+      .date {
+        @include text(0.8rem, 400, $mediumText);
+        margin-right: 0.5rem;
+      }
     }
   }
 }
