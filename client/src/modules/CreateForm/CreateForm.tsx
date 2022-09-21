@@ -1,5 +1,4 @@
 import withFormSubmit from '../../hocs/withFormSubmit';
-import { withFormFullPropTypes } from '../../types';
 import styles from './CreateForm.module.scss';
 
 const CreateForm = (
