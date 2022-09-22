@@ -1,31 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createTodo } from '../../actions/todoListActions';
 import { ToDoItemTypes } from '../../../types/index.js';
 import { todoList } from '../../../assets/list.js';
 
 const todoListSlice = createSlice({
-  name: 'todoList',
-  initialState: todoList as ToDoItemTypes[],
+  name: 'todoListReducer',
+  initialState: { list: todoList as ToDoItemTypes[] },
   reducers: {
     setTodoStatus(state, action: PayloadAction<string>) {
-      state.map((item: ToDoItemTypes): ToDoItemTypes => {
+      state.list.map((item: ToDoItemTypes): ToDoItemTypes => {
         if (item.id === action.payload) {
           item.completed = !item.completed;
         }
         return item;
       });
     },
+    removeTodo(state, action: PayloadAction<string>) {
+      return {
+        ...state,
+        list: state.list.filter((item: ToDoItemTypes): boolean => {
+          return current(item).id !== action.payload;
+        }),
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
       createTodo,
       (state, action: PayloadAction<ToDoItemTypes>) => {
-        state.push(action.payload);
+        state.list.push(action.payload);
       }
     );
   },
 });
 
-export const { setTodoStatus } = todoListSlice.actions;
+export const { setTodoStatus, removeTodo } = todoListSlice.actions;
 export default todoListSlice.reducer;

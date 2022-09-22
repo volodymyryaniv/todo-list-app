@@ -8,8 +8,8 @@ const CreateForm = (props: withFormFullPropTypes) => {
   const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
 
   const minDate = formatFormDate();
-  const createdDate = created ? created : formatFormDate();
-  const expireDate = expire ? expire : formatFormDate();
+  const createdDate = created ? formatFormDate(created) : formatFormDate();
+  const expireDate = expire ? formatFormDate(expire) : formatFormDate();
 
   const onSetDateHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setCreated(e.target.value);
