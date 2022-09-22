@@ -1,0 +1,31 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.container {
+  .form {
+    text-align: center;
+    label {
+      @include text(1rem, 700, $buttonHoverColor);
+      .input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid $mediumText;
+        border-radius: 0.3rem;
+        margin: 0.5rem 0;
+      }
+    }
+    .button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.4rem;
+      @include text(1.1rem, 700, $buttonHoverColor);
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+      &:hover {
+        background-color: $buttonHoverColor;
+        color: $lightText;
+        transition: all 0.3s ease-in;
+      }
+    }
+  }
+}

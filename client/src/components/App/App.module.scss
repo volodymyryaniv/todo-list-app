@@ -3,8 +3,29 @@
 
 .wrapper {
   background-color: $bgColor;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
+  padding: 1rem;
+  overflow: auto;
+  @include flex(center, flex-start);
   .container {
+    width: 100%;
+    @media (min-width: 767px) {
+      width: 80%;
+    }
+    @media (min-width: 1024px) {
+      width: 60%;
+    }
+    .title {
+      @include text(2rem, 700, $lightText);
+      padding: 1rem 0 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+    }
   }
 }
