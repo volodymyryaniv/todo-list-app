@@ -9,9 +9,11 @@ export const createTodo = createAction(
     expireUntil?: ToDoItemTypes['expireUntil']
   ) {
     const date = new Date();
-    const dateDefault = created ? created : date.toLocaleString();
+    const dateDefault = created
+      ? new Date(created).toLocaleString()
+      : date.toLocaleString();
     const expiredDefault = expireUntil
-      ? expireUntil
+      ? new Date(expireUntil).toLocaleString()
       : new Date(date.setDate(date.getDate() + 1)).toLocaleString();
     return {
       payload: {

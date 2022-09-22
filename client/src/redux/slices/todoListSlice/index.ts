@@ -7,7 +7,16 @@ import { todoList } from '../../../assets/list.js';
 const todoListSlice = createSlice({
   name: 'todoList',
   initialState: todoList as ToDoItemTypes[],
-  reducers: {},
+  reducers: {
+    setTodoStatus(state, action: PayloadAction<string>) {
+      state.map((item: ToDoItemTypes): ToDoItemTypes => {
+        if (item.id === action.payload) {
+          item.completed = !item.completed;
+        }
+        return item;
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       createTodo,
@@ -18,4 +27,5 @@ const todoListSlice = createSlice({
   },
 });
 
+export const { setTodoStatus } = todoListSlice.actions;
 export default todoListSlice.reducer;

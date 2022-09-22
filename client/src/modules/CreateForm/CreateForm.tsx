@@ -5,8 +5,7 @@ import { formatFormDate } from '../../services/formatDate';
 import styles from './CreateForm.module.scss';
 
 const CreateForm = (props: withFormFullPropTypes) => {
-  const { text, setText, created, setCreated, expire, setExpire, onSubmit } =
-    props;
+  const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
 
   const minDate = formatFormDate();
   const createdDate = created ? created : formatFormDate();
