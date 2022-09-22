@@ -6,7 +6,7 @@ import { setPopup } from '../redux/slices/popupSlice';
 
 export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof withFormFullPropTypes>) => {
-
+  
     const [text, setText] = useState<string>('');
     const [created, setCreated] = useState<string>('');
     const [expire, setExpire] = useState<string>('');
