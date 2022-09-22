@@ -12,7 +12,13 @@
   .container {
     @include flex(center, center, column);
     background-color: $bgColor;
-    padding: 5rem;
+    padding: 1rem;
+    @media (min-width: 390px) {
+      padding: 3rem;
+    }
+    @media (min-width: 767px) {
+      padding: 4.4rem;
+    }
     margin: 1rem;
     overflow: auto;
     .button {

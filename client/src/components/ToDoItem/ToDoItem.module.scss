@@ -2,53 +2,67 @@
 @import '../../styles/mixins.scss';
 
 .container {
+  @include flex(space-between, center);
+  width: 100%;
   padding: 1.1rem 0.8rem;
-  @include flex(center, flex-start, column);
-  flex-wrap: wrap;
   border-bottom: 2px solid $darkText;
   @media (min-width: 767px) {
-    @include flex(space-between, center, row);
+    @include flex(space-between, center);
   }
-  .mainInfo {
-    @include flex(flex-start, center);
-    @media (min-width: 768px) {
-      max-width: 55%;
+  .content {
+    width: 100%;
+    @include flex(center, flex-start, column);
+    flex-wrap: wrap;
+    @media (min-width: 767px) {
+      @include flex(space-between, center, row);
     }
-    .checkbox {
-      margin-right: 0.5rem;
-    }
-    .text {
-      flex: 1 1 auto;
-    }
-    .done {
-      color: $doneTaskText;
-      text-decoration: line-through;
-    }
-  }
-  .details {
-    @include flex(flex-start, center);
-    margin: 0.2rem 0 0 1.3rem;
-    .dateBlock {
-      @include flex(flex-start, flex-start, column);
-      @media (min-width: 390px) {
-        flex-direction: row;
-        align-items: center;
+    .mainInfo {
+      @include flex(flex-start, center);
+      @media (min-width: 767px) {
+        max-width: 55%;
       }
-      @media (min-width: 768px) {
-        flex-direction: column;
-      }
-      .title {
-        @include text(0.8rem, 500, $buttonHoverColor);
+      .checkbox {
         margin-right: 0.5rem;
       }
-      .date {
-        @include text(0.8rem, 400, $mediumText);
-        margin-right: 0.5rem;
+      .text {
+        flex: 1 1 auto;
       }
       .done {
         color: $doneTaskText;
         text-decoration: line-through;
       }
+    }
+    .details {
+      @include flex(flex-start, center);
+      margin: 0.2rem 0 0 1.3rem;
+      .dateBlock {
+        @include flex(flex-start, flex-start, column);
+        @media (min-width: 390px) {
+          flex-direction: row;
+          align-items: center;
+        }
+        @media (min-width: 768px) {
+          flex-direction: column;
+        }
+        .title {
+          @include text(0.8rem, 500, $buttonHoverColor);
+          margin-right: 0.5rem;
+        }
+        .date {
+          @include text(0.8rem, 400, $mediumText);
+          margin-right: 0.5rem;
+        }
+        .done {
+          color: $doneTaskText;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+  .buttonsBlock {
+    img {
+      width: 1.3rem;
+      cursor: pointer;
     }
   }
 }
