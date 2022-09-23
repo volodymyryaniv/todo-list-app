@@ -26,3 +26,23 @@ export const createTodo = createAction(
     };
   }
 );
+
+export const updateTodo = createAction(
+  'updateTodo',
+  function prepare(
+    text: ToDoItemTypes['text'],
+    created: ToDoItemTypes['created'],
+    expireUntil: ToDoItemTypes['expireUntil'],
+    id: ToDoItemTypes['id']
+  ) {
+    return {
+      payload: {
+        text,
+        id,
+        created,
+        expireUntil,
+        completed: false,
+      },
+    };
+  }
+);

@@ -1,28 +1,35 @@
 import { ChangeEvent } from 'react';
+import { useAppSelector } from '../../hooks/redux-hooks';
 import withFormSubmit from '../../hocs/withFormSubmit';
 import { withFormFullPropTypes } from '../../types';
 import { formatFormDate } from '../../services/formatDate';
 import styles from './CreateForm.module.scss';
 
 const CreateForm = (props: withFormFullPropTypes) => {
+  const { container, form, input, button } = styles;
   const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
 
-  const minDate = formatFormDate();
+  const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
+
+  const minDate = currentItem ? formatFormDate(currentItem.created) : formatFormDate();
   const createdDate = created ? formatFormDate(created) : formatFormDate();
   const expireDate = expire ? formatFormDate(expire) : formatFormDate();
 
   const onSetDateHandler = (e: ChangeEvent<HTMLInputElement>): void => {
-    setCreated(e.target.value);
-    setExpire(e.target.value);
+    const value = e.target.value;
+    setCreated(value);
+    if (value > expireDate) {
+      setExpire(value);
+    }
   };
 
   return (
-    <section className={styles.container}>
-      <form className={styles.form} onSubmit={onSubmit}>
+    <section className={container}>
+      <form className={form} onSubmit={onSubmit}>
         <label>
           Your task
           <input
-            className={styles.input}
+            className={input}
             type="text"
             placeholder="Enter your task"
             value={text}
@@ -33,7 +40,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
         <label>
           Created date
           <input
-            className={styles.input}
+            className={input}
             type="datetime-local"
             name="created"
             value={createdDate}
@@ -44,7 +51,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
         <label>
           Expiry date
           <input
-            className={styles.input}
+            className={input}
             type="datetime-local"
             name="expireUntil"
             value={expireDate}
@@ -52,7 +59,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             onChange={(e) => setExpire(e.target.value)}
           />
         </label>
-        <button className={styles.button} type="submit">
+        <button className={button} type="submit">
           Save
         </button>
       </form>
