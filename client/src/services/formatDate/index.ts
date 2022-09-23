@@ -1,5 +1,4 @@
 export const formatDisplayDate = (date: string, separator: string = ' ') => {
-  console.log('formatDisplayDate input', date); //for testing
   const localDate = new Date(date).toLocaleString('ua', {
     dateStyle: 'short',
     timeStyle: 'short',
@@ -8,7 +7,6 @@ export const formatDisplayDate = (date: string, separator: string = ' ') => {
 };
 
 export const formatFormDate = (dateString?: string) => {
-  console.log('formatFormDate input', dateString); //for testing
   const currentDate = dateString ? new Date(dateString) : new Date();
   const date = currentDate
     .toISOString()
