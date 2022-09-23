@@ -5,17 +5,17 @@ import { ToDoItemTypes } from '../../types';
 import styles from './ToDoList.module.scss';
 
 const ToDoList: FC = () => {
-  const list = useAppSelector(state => state.todoListReducer.list);
+  const { container } = styles;
+  const list = useAppSelector((state) => state.todoListReducer.list);
 
   return (
-    <section className={styles.container}>
-      {list && list.map((item: ToDoItemTypes) => {
-        return (
-          <ToDoItem key={item.id} {...item} />
-        )
-      })}
+    <section className={container}>
+      {list &&
+        list.map((item: ToDoItemTypes) => {
+          return <ToDoItem key={item.id} {...item} />;
+        })}
     </section>
-  )
-}
+  );
+};
 
 export default ToDoList;

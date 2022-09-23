@@ -1,12 +1,23 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { setTodoStatus, removeTodo } from '../../redux/slices/todoListSlice';
+import { setTodoStatus, removeTodo, setActiveTodo } from '../../redux/slices/todoListSlice';
 import { ToDoItemTypes } from '../../types';
 import { formatDisplayDate } from '../../services/formatDate';
 import styles from './ToDoItem.module.scss';
+import { setPopup } from '../../redux/slices/popupSlice';
 
 const ToDoItem: FC<ToDoItemTypes> = (props) => {
+  const {
+    container,
+    content,
+    mainInfo,
+    checkbox,
+    details,
+    dateBlock,
+    buttonsBlock,
+  } = styles;
   const { id, text, created, expireUntil, completed } = props;
+
   const dispatch = useAppDispatch();
 
   const formatClassNames = (
@@ -27,34 +38,44 @@ const ToDoItem: FC<ToDoItemTypes> = (props) => {
     dispatch(setTodoStatus(id));
   };
 
+  const onEditHandler = (id: ToDoItemTypes['id']) => {
+    dispatch(setActiveTodo(id))
+    dispatch(setPopup(true))
+  }
+
   return (
-    <article className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.mainInfo}>
+    <article className={container}>
+      <div className={content}>
+        <div className={mainInfo}>
           <input
-            className={styles.checkbox}
+            className={checkbox}
             type="checkbox"
             checked={completed}
             onChange={() => onSetStatusHandler(id)}
           />
           <p className={textStyle}>{text}</p>
         </div>
-        <article className={styles.details}>
-          <div className={styles.dateBlock}>
+        <article className={details}>
+          <div className={dateBlock}>
             <h5 className={titleStyle}>Created</h5>
             <span className={dateStyle}>{formatedCreated}</span>
           </div>
-          <div className={styles.dateBlock}>
+          <div className={dateBlock}>
             <h5 className={titleStyle}>Expiry</h5>
             <span className={dateStyle}>{formatedExpire}</span>
           </div>
         </article>
       </div>
-      <div className={styles.buttonsBlock}>
+      <div className={buttonsBlock}>
         <img
           src="/icons/delete.svg"
           alt="delete icon"
           onClick={() => dispatch(removeTodo(id))}
+        />
+        <img
+          src="/icons/edit.png"
+          alt="delete icon"
+          onClick={() => onEditHandler(id)}
         />
       </div>
     </article>

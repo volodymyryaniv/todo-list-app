@@ -1,12 +1,20 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createTodo } from '../../actions/todoListActions';
+import { createTodo, updateTodo } from '../../actions/todoListActions';
 import { ToDoItemTypes } from '../../../types/index.js';
 import { todoList } from '../../../assets/list.js';
 
+interface StateTypes {
+  list: ToDoItemTypes[];
+  activeItem: ToDoItemTypes | null;
+}
+
 const todoListSlice = createSlice({
   name: 'todoListReducer',
-  initialState: { list: todoList as ToDoItemTypes[] },
+  initialState: {
+    list: todoList,
+    activeItem: null,
+  } as StateTypes,
   reducers: {
     setTodoStatus(state, action: PayloadAction<string>) {
       state.list.map((item: ToDoItemTypes): ToDoItemTypes => {
@@ -24,6 +32,21 @@ const todoListSlice = createSlice({
         }),
       };
     },
+    setActiveTodo(state, action: PayloadAction<string>) {
+      const item = state.list.filter((item: ToDoItemTypes): boolean => {
+        return current(item).id === action.payload;
+      });
+      return {
+        ...state,
+        activeItem: item[0],
+      };
+    },
+    removeActiveTodo: (state) => {
+      return {
+        ...state,
+        activeItem: null,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -32,8 +55,22 @@ const todoListSlice = createSlice({
         state.list.push(action.payload);
       }
     );
+    builder.addCase(updateTodo, (state, action): StateTypes => {
+      const updatedList = state.list.map((item: ToDoItemTypes) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        list: updatedList,
+      };
+    });
   },
 });
 
-export const { setTodoStatus, removeTodo } = todoListSlice.actions;
+export const { setTodoStatus, removeTodo, setActiveTodo, removeActiveTodo } =
+  todoListSlice.actions;
 export default todoListSlice.reducer;

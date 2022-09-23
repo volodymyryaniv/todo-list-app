@@ -8,6 +8,7 @@ import styles from './AddNewTodo.module.scss';
 
 const QuickCreation = (props: withFormSimplePropTypes) => {
   const { text, setText, onSubmit } = props;
+  const { container, form, input, icon } = styles;
 
   const open = useAppSelector((state) => state.popupSlice);
   const dispatch = useAppDispatch();
@@ -18,10 +19,10 @@ const QuickCreation = (props: withFormSimplePropTypes) => {
 
   return (
     <>
-      <section className={styles.container}>
-        <form className={styles.form} onSubmit={onSubmit}>
+      <section className={container}>
+        <form className={form} onSubmit={onSubmit}>
           <input
-            className={styles.input}
+            className={input}
             type="text"
             placeholder="Quick add new todo"
             value={text}
@@ -29,7 +30,7 @@ const QuickCreation = (props: withFormSimplePropTypes) => {
           />
         </form>
         <img
-          className={styles.icon}
+          className={icon}
           src="/icons/add.svg"
           alt="cross icon"
           onClick={onClickHandler}
