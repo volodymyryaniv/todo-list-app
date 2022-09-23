@@ -12,8 +12,8 @@ const CreateForm = (props: withFormFullPropTypes) => {
   const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
 
   const minDate = formatFormDate(currentItem?.created);
-  const createdDate = created ? formatFormDate(created) : formatFormDate();
-  const expireDate = expire ? formatFormDate(expire) : formatFormDate();
+  const createdDate = formatFormDate(created);
+  const expireDate = formatFormDate(expire);
 
   const onSetDateHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;

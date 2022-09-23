@@ -1,5 +1,5 @@
 export const formatDisplayDate = (date: string, separator: string = ' ') => {
-  const localDate = new Date(date).toLocaleString('ua', {
+  const localDate = new Date(date).toLocaleString('pl-PL', {
     dateStyle: 'short',
     timeStyle: 'short',
   });
@@ -12,6 +12,6 @@ export const formatFormDate = (dateString?: string) => {
     .toISOString()
     .replace(/(\.|\/)/g, '-')
     .split('T', 1);
-  const time = currentDate.toLocaleTimeString('ua', { timeStyle: 'short' });
+  const time = currentDate.toLocaleTimeString('pl-PL', { timeStyle: 'short' });
   return `${date}T${time}`;
 };
