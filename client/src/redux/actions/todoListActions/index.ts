@@ -15,6 +15,10 @@ export const createTodo = createAction(
     const expiredDefault = expireUntil
       ? new Date(expireUntil).toString()
       : new Date(date.setDate(date.getDate() + 1)).toString();
+
+    console.log('createTodo saving format', new Date().toString()); //for testing
+    console.log('createTodo created', new Date().toString()); //for testing
+    console.log('createTodo expireUntil', new Date().toString());
     return {
       payload: {
         text,

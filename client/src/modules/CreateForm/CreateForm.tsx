@@ -11,7 +11,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
 
   const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
 
-  const minDate = currentItem ? formatFormDate(currentItem.created) : formatFormDate();
+  const minDate = formatFormDate(currentItem?.created);
   const createdDate = created ? formatFormDate(created) : formatFormDate();
   const expireDate = expire ? formatFormDate(expire) : formatFormDate();
 
