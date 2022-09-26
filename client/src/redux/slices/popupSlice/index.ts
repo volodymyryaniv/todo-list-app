@@ -1,12 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
+export interface PopupStateTypes {
+  open: boolean;
+}
+
 const popupSlice = createSlice({
   name: 'todoList',
-  initialState: false,
+  initialState: { open: false } as PopupStateTypes,
   reducers: {
     setPopup: (state, action: PayloadAction<boolean>) => {
-      state = action.payload;
+      state.open = action.payload;
       return state;
     },
   },

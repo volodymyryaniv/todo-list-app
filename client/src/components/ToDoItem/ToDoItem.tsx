@@ -1,21 +1,19 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { setTodoStatus, removeTodo, setActiveTodo } from '../../redux/slices/todoListSlice';
+import {
+  setTodoStatus,
+  removeTodo,
+  setActiveTodo,
+} from '../../redux/slices/todoListSlice';
 import { ToDoItemTypes } from '../../types';
 import { formatDisplayDate } from '../../services/formatDate';
-import styles from './ToDoItem.module.scss';
 import { setPopup } from '../../redux/slices/popupSlice';
+import ToggleButton from '../../modules/ToggleButton';
+import styles from './ToDoItem.module.scss';
 
 const ToDoItem: FC<ToDoItemTypes> = (props) => {
-  const {
-    container,
-    content,
-    mainInfo,
-    checkbox,
-    details,
-    dateBlock,
-    buttonsBlock,
-  } = styles;
+  const { container, content, mainInfo, details, dateBlock, buttonsBlock } =
+    styles;
   const { id, text, created, expireUntil, completed } = props;
 
   const dispatch = useAppDispatch();
@@ -39,19 +37,17 @@ const ToDoItem: FC<ToDoItemTypes> = (props) => {
   };
 
   const onEditHandler = (id: ToDoItemTypes['id']) => {
-    dispatch(setActiveTodo(id))
-    dispatch(setPopup(true))
-  }
+    dispatch(setActiveTodo(id));
+    dispatch(setPopup(true));
+  };
 
   return (
     <article className={container}>
       <div className={content}>
         <div className={mainInfo}>
-          <input
-            className={checkbox}
-            type="checkbox"
+          <ToggleButton
             checked={completed}
-            onChange={() => onSetStatusHandler(id)}
+            onChangeHandler={() => onSetStatusHandler(id)}
           />
           <p className={textStyle}>{text}</p>
         </div>

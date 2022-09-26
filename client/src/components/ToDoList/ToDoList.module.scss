@@ -1,7 +1,12 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.container {
+.wrapper {
   @include text(1.1rem, 400, $darkText);
   background-color: $lightText;
+  .container {
+    overflow: auto;
+    scroll-behavior: smooth;
+    max-height: 80vh;
+  }
 }

@@ -1,0 +1,49 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+$sliderWidth: 35px;
+$sliderHeight: 20px;
+$positionValue: 3px;
+$toggleWidth: calc(($sliderWidth - $positionValue * 2) / 2);
+$toggleHeight: calc($sliderHeight - $positionValue * 2);
+
+.container {
+  position: relative;
+  display: inline-block;
+  min-width: $sliderWidth;
+  height: $sliderHeight;
+  margin-right: 0.5rem;
+  .input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked + .slider:before {
+      transform: translateX($toggleWidth);
+    }
+    &:checked + .slider {
+      background-color: rgb(31, 128, 98);
+    }
+  }
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    border-radius: 17px;
+    background-color: $toggleUnchecked;
+    transition: all 0.3s;
+    &::before {
+      content: '';
+      position: absolute;
+      width: $toggleWidth;
+      height: $toggleHeight;
+      left: $positionValue;
+      bottom: $positionValue;
+      border-radius: 50%;
+      background-color: $lightText;
+      transition: all 0.2s;
+    }
+  }
+}

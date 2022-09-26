@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
+import { Outlet } from 'react-router-dom';
 import { setPopup } from '../../redux/slices/popupSlice';
 import withFormSubmit from '../../hocs/withFormSubmit';
 import { withFormSimplePropTypes } from '../../types';
@@ -6,11 +7,11 @@ import Popup from '../../modules/Popup';
 import CreateForm from '../../modules/CreateForm';
 import styles from './AddNewTodo.module.scss';
 
-const QuickCreation = (props: withFormSimplePropTypes) => {
+const AddNewTodo = (props: withFormSimplePropTypes) => {
   const { text, setText, onSubmit } = props;
   const { container, form, input, icon } = styles;
 
-  const open = useAppSelector((state) => state.popupSlice);
+  const open = useAppSelector((state) => state.popupSlice.open);
   const dispatch = useAppDispatch();
 
   const onClickHandler = () => {
@@ -37,8 +38,9 @@ const QuickCreation = (props: withFormSimplePropTypes) => {
         />
       </section>
       {open && <Popup children={<CreateForm />} />}
+      <Outlet />
     </>
   );
 };
 
-export default withFormSubmit(QuickCreation);
+export default withFormSubmit(AddNewTodo);
