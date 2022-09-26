@@ -1,12 +1,16 @@
 import { useState, ComponentType, SyntheticEvent } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
 import { createTodo, updateTodo } from '../redux/actions/todoListActions';
 import { removeActiveTodo } from '../redux/slices/todoListSlice';
-import { withFormFullPropTypes } from '../types';
 import { setPopup } from '../redux/slices/popupSlice';
+import { setScrollBottom } from '../redux/slices/todoListSlice';
+import { withFormFullPropTypes } from '../types';
 
 export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof withFormFullPropTypes>) => {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
     const defaultId = currentItem?.id || '';
@@ -26,6 +30,10 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
       if (text.trim()) {
         if (!currentItem) {
           dispatch(createTodo(text, created, expire));
+          dispatch(setScrollBottom());
+          if (pathname !== '/active') {
+            navigate('/');
+          }
         } else {
           dispatch(updateTodo(text, created, expire, defaultId))
           dispatch(removeActiveTodo())
@@ -51,3 +59,4 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
     );
   };
 }
+

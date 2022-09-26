@@ -21,9 +21,6 @@
       @media (min-width: 767px) {
         max-width: 55%;
       }
-      .checkbox {
-        margin-right: 0.5rem;
-      }
       .text {
         flex: 1 1 auto;
       }
@@ -34,7 +31,7 @@
     }
     .details {
       @include flex(flex-start, center);
-      margin: 0.2rem 0 0 1.3rem;
+      margin: 0.2rem 0 0 2.7rem;
       .dateBlock {
         @include flex(flex-start, flex-start, column);
         @media (min-width: 390px) {

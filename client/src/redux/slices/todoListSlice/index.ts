@@ -4,9 +4,14 @@ import { createTodo, updateTodo } from '../../actions/todoListActions';
 import { ToDoItemTypes } from '../../../types/index.js';
 import { todoList } from '../../../assets/list.js';
 
-interface StateTypes {
+export interface TodoListType {
   list: ToDoItemTypes[];
+}
+
+export interface TodoStateTypes extends TodoListType {
   activeItem: ToDoItemTypes | null;
+  scrollBottom?: boolean;
+  scrollTop?: boolean;
 }
 
 const todoListSlice = createSlice({
@@ -14,7 +19,9 @@ const todoListSlice = createSlice({
   initialState: {
     list: todoList,
     activeItem: null,
-  } as StateTypes,
+    scrollBottom: false,
+    scrollTop: false,
+  } as TodoStateTypes,
   reducers: {
     setTodoStatus(state, action: PayloadAction<string>) {
       state.list.map((item: ToDoItemTypes): ToDoItemTypes => {
@@ -47,6 +54,26 @@ const todoListSlice = createSlice({
         activeItem: null,
       };
     },
+    clearCompletedTodo: (state) => {
+      return {
+        ...state,
+        list: state.list.filter((item: ToDoItemTypes): boolean => {
+          return !item.completed;
+        }),
+      };
+    },
+    setScrollBottom: (state) => {
+      return {
+        ...state,
+        scrollBottom: !state.scrollBottom,
+      };
+    },
+    setScrollTop: (state) => {
+      return {
+        ...state,
+        scrollTop: !state.scrollTop,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -55,7 +82,7 @@ const todoListSlice = createSlice({
         state.list.push(action.payload);
       }
     );
-    builder.addCase(updateTodo, (state, action): StateTypes => {
+    builder.addCase(updateTodo, (state, action): TodoStateTypes => {
       const updatedList = state.list.map((item: ToDoItemTypes) => {
         if (item.id === action.payload.id) {
           return action.payload;
@@ -71,6 +98,13 @@ const todoListSlice = createSlice({
   },
 });
 
-export const { setTodoStatus, removeTodo, setActiveTodo, removeActiveTodo } =
-  todoListSlice.actions;
+export const {
+  setTodoStatus,
+  removeTodo,
+  setActiveTodo,
+  removeActiveTodo,
+  clearCompletedTodo,
+  setScrollBottom,
+  setScrollTop,
+} = todoListSlice.actions;
 export default todoListSlice.reducer;

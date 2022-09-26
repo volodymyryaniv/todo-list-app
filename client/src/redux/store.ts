@@ -12,9 +12,13 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import todoListReducer from './slices/todoListSlice';
 import popupSlice from './slices/popupSlice';
 import { todoListPersistConfig } from './persistConfig';
+import { TodoStateTypes } from './slices/todoListSlice';
 
 const rootReducer = combineReducers({
-  todoListReducer: persistReducer(todoListPersistConfig, todoListReducer),
+  todoListReducer: persistReducer<TodoStateTypes>(
+    todoListPersistConfig,
+    todoListReducer
+  ),
   popupSlice,
 });
 

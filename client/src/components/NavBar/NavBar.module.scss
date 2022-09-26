@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.container {
+  @include flex(center, center, column);
+  @include text(1.2rem, 500);
+  background-color: rgb(152, 175, 177);
+  padding: 1.1rem 0.8rem;
+  @media (min-width: 390px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .title {
+    font-size: 1rem;
+    color: $lightText;
+    margin-right: 0.5rem;
+  }
+  .linkContainer {
+    flex: 1 1 auto;
+    margin: 0;
+    .active {
+      color: $lightText;
+      text-decoration: none;
+      margin-right: 0.5rem;
+    }
+    .disabled {
+      color: $disableLink;
+      text-decoration: none;
+      margin-right: 0.5rem;
+    }
+  }
+  .clearAll {
+    text-align: center;
+    cursor: pointer;
+    color: $dangerousText;
+  }
+}
