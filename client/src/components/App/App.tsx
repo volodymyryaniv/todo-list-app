@@ -2,20 +2,27 @@ import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import {
-  selectActive,
-  selectCompleted,
-  selectList,
+  selectState,
+  selectAllSortedList,
+  selectActiveSortedList,
+  selectCompletedSortedList,
+  selectAll,
 } from '../../redux/selectors/todolistSelectors';
 import AddNewTodo from '../AddNewTodo';
 import NavBar from '../NavBar';
 import ToDoList from '../ToDoList';
 import styles from './App.module.scss';
 
+
+
 const App: FC = () => {
   const { wrapper, container, title } = styles;
-  const list = useAppSelector(selectList);
-  const listActive = useAppSelector(selectActive);
-  const listCompleted = useAppSelector(selectCompleted);
+  const { value } = useAppSelector(selectAll).sortBy;
+
+  const state = useAppSelector(selectState);
+  const list = selectAllSortedList(state, value);
+  const listActive = useAppSelector(state => selectActiveSortedList(state, value));
+  const listCompleted = selectCompletedSortedList(state, value);
 
   return (
     <div className={wrapper}>

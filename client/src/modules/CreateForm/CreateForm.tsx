@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import withFormSubmit from '../../hocs/withFormSubmit';
+import { selectAll } from '../../redux/selectors/todolistSelectors';
 import { withFormFullPropTypes } from '../../types';
 import { formatFormDate } from '../../services/formatDate';
 import styles from './CreateForm.module.scss';
@@ -9,7 +10,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
   const { container, form, input, button } = styles;
   const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
 
-  const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
+  const currentItem = useAppSelector(selectAll).activeItem;
 
   const minDate = formatFormDate(currentItem?.created);
   const createdDate = formatFormDate(created);

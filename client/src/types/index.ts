@@ -18,3 +18,13 @@ export interface withFormFullPropTypes extends withFormSimplePropTypes {
   expire: string;
   setExpire: (value: string) => void;
 }
+
+export interface SortTypes {
+  title: string;
+  value: string;
+}
+
+export interface SetSortTypes {
+  sort: SortTypes;
+  setSort: React.Dispatch<React.SetStateAction<SortTypes>>;
+}

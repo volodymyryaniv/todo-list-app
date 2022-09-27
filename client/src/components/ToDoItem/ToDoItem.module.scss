@@ -34,7 +34,7 @@
       margin: 0.2rem 0 0 2.7rem;
       .dateBlock {
         @include flex(flex-start, flex-start, column);
-        @media (min-width: 390px) {
+        @media (min-width: 435px) {
           flex-direction: row;
           align-items: center;
         }
