@@ -12,7 +12,7 @@ import ToggleButton from '../../modules/ToggleButton';
 import styles from './ToDoItem.module.scss';
 
 interface ItemPositionTypes {
-  setPosition: Dispatch<SetStateAction<number | undefined>>
+  setPosition: Dispatch<SetStateAction<number>>;
 }
 
 const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
@@ -42,7 +42,7 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   };
 
   const onEditHandler = () => {
-    setPosition(itemRef.current?.offsetTop);
+    setPosition(itemRef.current?.offsetTop || 0);
     dispatch(setActiveTodo(id));
     dispatch(setPopup(true));
   };

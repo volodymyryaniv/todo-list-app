@@ -1,0 +1,31 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.container {
+  position: relative;
+  .input {
+    width: 100%;
+    padding: 0.8rem 3rem;
+    border: 1px solid $mediumText;
+    border-radius: 0.3rem;
+  }
+  .icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 35px;
+  }
+  .clear {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    width: 35px;
+    opacity: 0.3;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+      transition: all 0.3s;
+    }
+  }
+}
