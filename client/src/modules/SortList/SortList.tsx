@@ -14,15 +14,16 @@ const SortList = () => {
   const { title } = useAppSelector(selectAll).sortBy;
   const [showSort, setShowSort] = useState<boolean>(false);
 
-  useEffect(() => {
-    const closeSortList = (e: MouseEvent) => {
-      const path = e.composedPath();
-      if (ref.current) {
-        if (!path.includes(ref.current)) {
-          setShowSort(false);
-        }
+  const closeSortList = (e: MouseEvent) => {
+    const path = e.composedPath();
+    if (ref.current) {
+      if (!path.includes(ref.current)) {
+        setShowSort(false);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     document.body.addEventListener('click', closeSortList);
     return () => document.body.removeEventListener('click', closeSortList);
   }, []);
@@ -45,19 +46,15 @@ const SortList = () => {
       </div>
       {showSort && (
         <ul className={container}>
-          {categories.map((category) => {
-            return (
-              <li
-                className={
-                  category.title === title ? `${item} ${active}` : item
-                }
-                key={category.value}
-                onClick={() => onSortHandler(category)}
-              >
-                {category.title}
-              </li>
-            );
-          })}
+          {categories.map((category) => (
+            <li
+              className={category.title === title ? `${item} ${active}` : item}
+              key={category.value}
+              onClick={() => onSortHandler(category)}
+            >
+              {category.title}
+            </li>
+          ))}
         </ul>
       )}
     </section>

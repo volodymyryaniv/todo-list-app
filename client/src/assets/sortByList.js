@@ -9,11 +9,11 @@ export const categories = [
   },
   {
     title: 'Expiry date↑',
-    value: 'expiry-date-asc',
+    value: 'expireUntil-date-asc',
   },
   {
     title: 'Expiry date↓',
-    value: 'expiry-date-desc',
+    value: 'expireUntil-date-desc',
   },
   {
     title: 'Text content↑',

@@ -1,5 +1,6 @@
+import { ToDoItemTypes, ToDoType } from './../../../types';
 import { createSelector } from '@reduxjs/toolkit';
-import { ToDoItemTypes } from '../../../types';
+import { SortEnum } from '../../../enums';
 import { TodoStateTypes } from '../../slices/todoListSlice';
 import { RootState } from '../../store';
 
@@ -62,53 +63,26 @@ function orderBy(state: RootState, order: string) {
   return order;
 }
 
-function createdAsc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  const first = new Date(a.created);
-  const second = new Date(b.created);
-  return first > second ? 1 : -1;
-}
-
-function createdDesc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  const first = new Date(a.created);
-  const second = new Date(b.created);
-  return first < second ? 1 : -1;
-}
-
-function expiryAsc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  const first = new Date(a.expireUntil);
-  const second = new Date(b.expireUntil);
-  return first > second ? 1 : -1;
-}
-
-function expiryDesc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  const first = new Date(a.expireUntil);
-  const second = new Date(b.expireUntil);
-  return first < second ? 1 : -1;
-}
-
-function textAsc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  return a.text.localeCompare(b.text);
-}
-
-function textDesc(a: ToDoItemTypes, b: ToDoItemTypes) {
-  return b.text.localeCompare(a.text);
-}
-
 function sortList(list: TodoStateTypes['list'], order: string) {
-  switch (order) {
-    case 'created-date-asc':
-      return list.sort(createdAsc);
-    case 'created-date-desc':
-      return list.sort(createdDesc);
-    case 'expiry-date-asc':
-      return list.sort(expiryAsc);
-    case 'expiry-date-desc':
-      return list.sort(expiryDesc);
-    case 'text-asc':
-      return list.sort(textAsc);
-    case 'text-desc':
-      return list.sort(textDesc);
-    default:
-      return list;
-  }
+  const arr = order.split('-');
+  const orderBy = arr[0].toString();
+  const type = arr.at(-1);
+
+  return list.sort((itemA: ToDoType, itemB: ToDoType) => {
+    const first = new Date(itemA[orderBy as keyof ToDoType]);
+    const second = new Date(itemB[orderBy as keyof ToDoType]);
+    if (type === SortEnum.Asc) {
+      if (orderBy === SortEnum.Text) {
+        return itemA.text.localeCompare(itemB.text);
+      } else {
+        return first > second ? 1 : -1;
+      }
+    } else {
+      if (orderBy === SortEnum.Text) {
+        return itemB.text.localeCompare(itemA.text);
+      } else {
+        return first < second ? 1 : -1;
+      }
+    }
+  });
 }
