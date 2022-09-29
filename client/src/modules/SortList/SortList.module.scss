@@ -1,0 +1,50 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.wrapper {
+  position: relative;
+  div {
+    @include flex(space-between, center);
+    p {
+      @include text(1rem, 700);
+      @media (min-width: 525px) {
+        @include text(1.3rem, 700);
+      }
+    }
+    .icon {
+      margin: 0 0.5rem;
+      width: 1.9rem;
+      border-radius: 0.3rem;
+      cursor: pointer;
+    }
+  }
+  .container {
+    position: absolute;
+    top: 45px;
+    right: 0.4rem;
+    background-color: $navBarBg;
+    z-index: 10;
+    border-radius: 0.55rem;
+    border-top-right-radius: 0;
+    padding: 0.7rem;
+    .item {
+      @include text(1rem, 700);
+      list-style: none;
+      padding: 0.3rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      @media (min-width: 525px) {
+        font-size: 1.1rem;
+      }
+      &:hover {
+        color: $lightText;
+      }
+      .input {
+        display: none;
+      }
+    }
+    .active {
+      color: $toggleChecked;
+    }
+  }
+}

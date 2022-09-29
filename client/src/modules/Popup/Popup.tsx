@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { removeActiveTodo } from '../../redux/slices/todoListSlice';
+import { selectAll } from '../../redux/selectors/todolistSelectors';
 import { setPopup } from '../../redux/slices/popupSlice';
 import styles from './Popup.module.scss';
 
@@ -12,7 +13,7 @@ interface ModalProps {
 const Popup = ({ children }: ModalProps) => {
   const { wrapper, container, button } = styles;
   const el = useRef(document.createElement('div'));
-  const currentItem = useAppSelector(state => state.todoListReducer.activeItem);
+  const currentItem = useAppSelector(selectAll).activeItem;
   const dispatch = useAppDispatch();
 
   useEffect(() => {

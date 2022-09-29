@@ -1,36 +1,58 @@
-import { useRef, useEffect, FC } from 'react';
+import { useRef, useEffect, FC, useState, useDeferredValue, useMemo } from 'react';
 import { ToDoItemTypes } from '../../types';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { TodoListType } from '../../redux/slices/todoListSlice';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
+import { selectAllScrolls } from '../../redux/selectors/scrollSelectors';
+import { filterList } from '../../services/filterList';
 import ToDoItem from '../ToDoItem';
 import styles from './ToDoList.module.scss';
 
-const ToDoList: FC<TodoListType> = (props) => {
-  const { wrapper, container } = styles;
-  const { list } = props;
+interface SearchStrType {
+  searchValue: string;
+}
+
+const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
+  const { wrapper, container, fallback } = styles;
+  const { list, searchValue } = props;
+  const defferedSearchValue = useDeferredValue(searchValue);
+
   const listRef = useRef<HTMLDivElement>(null);
-  const { scrollBottom, scrollTop } = useAppSelector(selectAll);
+  const [position, setPosition] = useState<number>(0);
+  const { scrollBottom, scrollTop, scrollToElem } = useAppSelector(selectAllScrolls);
+
+  const filteredMemoList = useMemo(() => {
+    return filterList(list, defferedSearchValue);
+  }, [defferedSearchValue, list]);
 
   useEffect(() => {
     const current = listRef.current;
-    current?.scrollTo(0, current.scrollHeight);
+    current?.scrollTo(0, current?.scrollHeight);
   }, [scrollBottom]);
 
   useEffect(() => {
     listRef.current?.scrollTo(0, 0);
   }, [scrollTop]);
 
+  useEffect(() => {
+    listRef.current?.scrollTo(0, position);
+  }, [scrollToElem]);
+
   return (
     <section className={wrapper}>
       <div ref={listRef} className={container}>
-        {list &&
-          list.map((item: ToDoItemTypes) => {
-            return <ToDoItem key={item.id} {...item} />;
-          })}
+        {list.length ? (
+          filteredMemoList.map((item: ToDoItemTypes) => {
+            return <ToDoItem key={item.id} {...item} setPosition={setPosition} />;
+          })
+        ) : (
+          <div className={fallback}>
+            <h3>Add your first task here</h3>
+          </div>
+        )}
       </div>
     </section>
   );
+
 };
 
 export default ToDoList;

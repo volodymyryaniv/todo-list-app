@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, Dispatch, SetStateAction } from 'react';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import {
   setTodoStatus,
@@ -11,12 +11,17 @@ import { setPopup } from '../../redux/slices/popupSlice';
 import ToggleButton from '../../modules/ToggleButton';
 import styles from './ToDoItem.module.scss';
 
-const ToDoItem: FC<ToDoItemTypes> = (props) => {
+interface ItemPositionTypes {
+  setPosition: Dispatch<SetStateAction<number>>;
+}
+
+const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   const { container, content, mainInfo, details, dateBlock, buttonsBlock } =
     styles;
-  const { id, text, created, expireUntil, completed } = props;
+  const { id, text, created, expireUntil, completed, setPosition } = props;
 
   const dispatch = useAppDispatch();
+  const itemRef = useRef<HTMLDivElement>(null);
 
   const formatClassNames = (
     status: ToDoItemTypes['completed'],
@@ -32,22 +37,27 @@ const ToDoItem: FC<ToDoItemTypes> = (props) => {
   const dateStyle = formatClassNames(completed, 'date');
   const titleStyle = formatClassNames(completed, 'title');
 
-  const onSetStatusHandler = (id: ToDoItemTypes['id']) => {
+  const onSetStatusHandler = () => {
     dispatch(setTodoStatus(id));
   };
 
-  const onEditHandler = (id: ToDoItemTypes['id']) => {
+  const onEditHandler = () => {
+    setPosition(itemRef.current?.offsetTop || 0);
     dispatch(setActiveTodo(id));
     dispatch(setPopup(true));
   };
 
+  const onRemoveHandler = () => {
+    dispatch(removeTodo(id));
+  };
+
   return (
-    <article className={container}>
+    <article ref={itemRef} className={container}>
       <div className={content}>
         <div className={mainInfo}>
           <ToggleButton
             checked={completed}
-            onChangeHandler={() => onSetStatusHandler(id)}
+            onChangeHandler={onSetStatusHandler}
           />
           <p className={textStyle}>{text}</p>
         </div>
@@ -66,12 +76,12 @@ const ToDoItem: FC<ToDoItemTypes> = (props) => {
         <img
           src="/icons/delete.svg"
           alt="delete icon"
-          onClick={() => dispatch(removeTodo(id))}
+          onClick={onRemoveHandler}
         />
         <img
           src="/icons/edit.png"
           alt="delete icon"
-          onClick={() => onEditHandler(id)}
+          onClick={onEditHandler}
         />
       </div>
     </article>

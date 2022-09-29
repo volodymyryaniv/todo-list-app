@@ -2,9 +2,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Outlet } from 'react-router-dom';
 import { setPopup } from '../../redux/slices/popupSlice';
 import withFormSubmit from '../../hocs/withFormSubmit';
-import { withFormSimplePropTypes } from '../../types';
 import Popup from '../../modules/Popup';
 import CreateForm from '../../modules/CreateForm';
+import SortList from '../../modules/SortList';
+import { withFormSimplePropTypes } from '../../types';
 import styles from './AddNewTodo.module.scss';
 
 const AddNewTodo = (props: withFormSimplePropTypes) => {
@@ -21,6 +22,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
   return (
     <>
       <section className={container}>
+        <SortList />
         <form className={form} onSubmit={onSubmit}>
           <input
             className={input}

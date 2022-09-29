@@ -4,7 +4,7 @@
 .container {
   @include flex(center, center, column);
   @include text(1.2rem, 500);
-  background-color: rgb(152, 175, 177);
+  background-color: $navBarBg;
   padding: 1.1rem 0.8rem;
   @media (min-width: 390px) {
     flex-direction: row;

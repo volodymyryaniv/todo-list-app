@@ -1,10 +1,8 @@
 import { SyntheticEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import {
-  clearCompletedTodo,
-  setScrollTop,
-} from '../../redux/slices/todoListSlice';
+import { setScrollTop } from '../../redux/slices/scrollSlice';
+import { clearCompletedTodo } from '../../redux/slices/todoListSlice';
 import styles from './NavBar.module.scss';
 
 export default function NavBar() {
@@ -19,6 +17,10 @@ export default function NavBar() {
     navigate(to);
   };
 
+  const clearCompletedHandler = () => {
+    dispatch(clearCompletedTodo());
+  };
+
   return (
     <nav className={container}>
       <h5 className={title}>Items left:</h5>
@@ -26,27 +28,27 @@ export default function NavBar() {
         <NavLink
           end
           to="/"
-          className={({ isActive }) => (isActive ? active : disabled)}
+          className={({ isActive }) => isActive ? active : disabled}
           onClick={(e) => onClickHandler(e, '/')}
         >
           All
         </NavLink>
         <NavLink
           to="active"
-          className={({ isActive }) => (isActive ? active : disabled)}
+          className={({ isActive }) => isActive ? active : disabled}
           onClick={(e) => onClickHandler(e, '/active')}
         >
           Active
         </NavLink>
         <NavLink
           to="completed"
-          className={({ isActive }) => (isActive ? active : disabled)}
+          className={({ isActive }) => isActive ? active : disabled}
           onClick={(e) => onClickHandler(e, '/completed')}
         >
           Completed
         </NavLink>
       </div>
-      <p className={clearAll} onClick={() => dispatch(clearCompletedTodo())}>
+      <p className={clearAll} onClick={clearCompletedHandler}>
         Clear completed
       </p>
     </nav>

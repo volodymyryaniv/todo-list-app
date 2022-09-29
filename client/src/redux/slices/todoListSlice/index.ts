@@ -1,8 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createTodo, updateTodo } from '../../actions/todoListActions';
-import { ToDoItemTypes } from '../../../types/index.js';
-import { todoList } from '../../../assets/list.js';
+import { SortTypes, ToDoItemTypes } from '../../../types/index.js';
+import { categories } from '../../../assets/sortByList';
 
 export interface TodoListType {
   list: ToDoItemTypes[];
@@ -10,17 +10,15 @@ export interface TodoListType {
 
 export interface TodoStateTypes extends TodoListType {
   activeItem: ToDoItemTypes | null;
-  scrollBottom?: boolean;
-  scrollTop?: boolean;
+  sortBy: SortTypes;
 }
 
 const todoListSlice = createSlice({
   name: 'todoListReducer',
   initialState: {
-    list: todoList,
+    list: [],
     activeItem: null,
-    scrollBottom: false,
-    scrollTop: false,
+    sortBy: categories[0],
   } as TodoStateTypes,
   reducers: {
     setTodoStatus(state, action: PayloadAction<string>) {
@@ -62,16 +60,10 @@ const todoListSlice = createSlice({
         }),
       };
     },
-    setScrollBottom: (state) => {
+    setSortBy(state, action: PayloadAction<SortTypes>) {
       return {
         ...state,
-        scrollBottom: !state.scrollBottom,
-      };
-    },
-    setScrollTop: (state) => {
-      return {
-        ...state,
-        scrollTop: !state.scrollTop,
+        sortBy: action.payload,
       };
     },
   },
@@ -104,7 +96,6 @@ export const {
   setActiveTodo,
   removeActiveTodo,
   clearCompletedTodo,
-  setScrollBottom,
-  setScrollTop,
+  setSortBy,
 } = todoListSlice.actions;
 export default todoListSlice.reducer;

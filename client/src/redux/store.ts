@@ -10,6 +10,7 @@ import {
 } from 'redux-persist';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import todoListReducer from './slices/todoListSlice';
+import scrollSliceReducer from './slices/scrollSlice';
 import popupSlice from './slices/popupSlice';
 import { todoListPersistConfig } from './persistConfig';
 import { TodoStateTypes } from './slices/todoListSlice';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     todoListReducer
   ),
   popupSlice,
+  scrollSliceReducer,
 });
 
 export const store = configureStore({
