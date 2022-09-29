@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { SetSearchTypes } from '../../types';
 import styles from './SearchComponent.module.scss';
 
@@ -9,6 +10,10 @@ export default function SearchComponent(props: SetSearchTypes) {
     setSearch('');
   }
 
+  const onSetSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  };
+
   return (
     <article className={container}>
       <input
@@ -16,7 +21,7 @@ export default function SearchComponent(props: SetSearchTypes) {
         type="text"
         placeholder="Search task"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={onSetSearchHandler}
       />
       <img
         className={icon}
