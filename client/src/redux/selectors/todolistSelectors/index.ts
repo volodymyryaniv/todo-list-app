@@ -72,6 +72,7 @@ function sortList(list: TodoStateTypes['list'], order: string) {
     const second = new Date(
       itemB[orderBy as keyof Omit<ToDoItemTypes, 'completed'>]
     );
+
     if (type === SortEnum.Asc) {
       if (orderBy === SortEnum.Text) {
         return itemA.text.localeCompare(itemB.text);

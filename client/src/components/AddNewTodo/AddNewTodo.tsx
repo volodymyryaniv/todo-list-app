@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Outlet } from 'react-router-dom';
 import { setPopup } from '../../redux/slices/popupSlice';
@@ -19,6 +20,10 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
     dispatch(setPopup(true));
   };
 
+  const onSetTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
   return (
     <>
       <section className={container}>
@@ -29,7 +34,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
             type="text"
             placeholder="Quick add new todo"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={onSetTextHandler}
           />
         </form>
         <img

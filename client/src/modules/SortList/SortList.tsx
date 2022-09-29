@@ -33,6 +33,10 @@ const SortList = () => {
     setShowSort(false);
   };
 
+  const onShowSortHandler = () => {
+    setShowSort((prev) => !prev)
+  };
+
   return (
     <section ref={ref} className={wrapper}>
       <div>
@@ -41,7 +45,7 @@ const SortList = () => {
           className={icon}
           src="/icons/sort.png"
           alt="sort icon"
-          onClick={() => setShowSort((prev) => !prev)}
+          onClick={onShowSortHandler}
         />
       </div>
       {showSort && (
