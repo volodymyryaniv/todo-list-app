@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux-hooks';
+import { useAppSelector } from './hooks/redux-hooks';
 import {
   selectState,
   selectAllSortedList,
   selectActiveSortedList,
   selectCompletedSortedList,
   selectAll,
-} from '../../redux/selectors/todolistSelectors';
-import AddNewTodo from '../AddNewTodo';
-import NavBar from '../NavBar';
-import ToDoList from '../ToDoList';
+} from './redux/selectors/todolistSelectors';
+import AddNewTodo from './pages/AddNewTodo';
+import NavBar from './pages/NavBar';
+import ToDoList from './pages/ToDoList';
 import styles from './App.module.scss';
 
 

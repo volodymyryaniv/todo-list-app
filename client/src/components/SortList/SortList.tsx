@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { selectAll } from '../../redux/selectors/todolistSelectors';
 import { setSortBy } from '../../redux/slices/todoListSlice';
 import { SortTypes } from '../../types';
+import SortListItem from '../SortListItem';
 import styles from './SortList.module.scss';
 
 const SortList = () => {
-  const { wrapper, container, item, active, icon } = styles;
+  const { wrapper, container, icon } = styles;
 
   const ref = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
@@ -51,18 +52,17 @@ const SortList = () => {
       {showSort && (
         <ul className={container}>
           {categories.map((category) => (
-            <li
-              className={category.title === title ? `${item} ${active}` : item}
+            <SortListItem
               key={category.value}
-              onClick={() => onSortHandler(category)}
-            >
-              {category.title}
-            </li>
+              {...category}
+              onSortHandler={onSortHandler}
+            />
           ))}
         </ul>
       )}
     </section>
   );
+
 };
 
 export default SortList;

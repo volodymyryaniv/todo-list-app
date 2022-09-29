@@ -8,7 +8,7 @@ import {
 import { ToDoItemTypes } from '../../types';
 import { formatDisplayDate } from '../../services/formatDate';
 import { setPopup } from '../../redux/slices/popupSlice';
-import ToggleButton from '../../modules/ToggleButton';
+import ToggleButton from '../../components/ToggleButton';
 import styles from './ToDoItem.module.scss';
 
 interface ItemPositionTypes {
@@ -18,7 +18,7 @@ interface ItemPositionTypes {
 const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   const { container, content, mainInfo, details, dateBlock, buttonsBlock } =
     styles;
-  const { id, text, created, expireUntil, completed, setPosition } = props;
+  const { id, taskText, created, expireUntil, completed, setPosition } = props;
 
   const dispatch = useAppDispatch();
   const itemRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
             checked={completed}
             onChangeHandler={onSetStatusHandler}
           />
-          <p className={textStyle}>{text}</p>
+          <p className={textStyle}>{taskText}</p>
         </div>
         <article className={details}>
           <div className={dateBlock}>

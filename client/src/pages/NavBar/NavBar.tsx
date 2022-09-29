@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { NavLink, NavLinkProps, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { setScrollTop } from '../../redux/slices/scrollSlice';
 import { clearCompletedTodo } from '../../redux/slices/todoListSlice';

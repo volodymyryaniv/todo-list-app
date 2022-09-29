@@ -3,14 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Outlet } from 'react-router-dom';
 import { setPopup } from '../../redux/slices/popupSlice';
 import withFormSubmit from '../../hocs/withFormSubmit';
-import Popup from '../../modules/Popup';
-import CreateForm from '../../modules/CreateForm';
-import SortList from '../../modules/SortList';
+import Popup from '../../components/Popup';
+import CreateForm from '../../components/CreateForm';
+import SortList from '../../components/SortList';
 import { withFormSimplePropTypes } from '../../types';
 import styles from './AddNewTodo.module.scss';
 
 const AddNewTodo = (props: withFormSimplePropTypes) => {
-  const { text, setText, onSubmit } = props;
+  const { taskText, setTaskText, onSubmit } = props;
   const { container, form, input, icon } = styles;
 
   const open = useAppSelector((state) => state.popupSlice.open);
@@ -21,7 +21,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
   };
 
   const onSetTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    setTaskText(e.target.value);
   };
 
   return (
@@ -33,7 +33,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
             className={input}
             type="text"
             placeholder="Quick add new todo"
-            value={text}
+            value={taskText}
             onChange={onSetTextHandler}
           />
         </form>

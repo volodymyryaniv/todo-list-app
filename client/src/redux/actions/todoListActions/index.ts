@@ -4,7 +4,7 @@ import { ToDoItemTypes } from '../../../types/index.js';
 export const createTodo = createAction(
   'createTodo',
   function prepare(
-    text: ToDoItemTypes['text'],
+    text: ToDoItemTypes['taskText'],
     created?: ToDoItemTypes['created'],
     expireUntil?: ToDoItemTypes['expireUntil']
   ) {
@@ -17,7 +17,7 @@ export const createTodo = createAction(
       : new Date(date.setDate(date.getDate() + 1)).toString();
     return {
       payload: {
-        text,
+        taskText: text,
         id: nanoid(),
         created: dateDefault,
         expireUntil: expiredDefault,
@@ -30,14 +30,14 @@ export const createTodo = createAction(
 export const updateTodo = createAction(
   'updateTodo',
   function prepare(
-    text: ToDoItemTypes['text'],
+    text: ToDoItemTypes['taskText'],
     created: ToDoItemTypes['created'],
     expireUntil: ToDoItemTypes['expireUntil'],
     id: ToDoItemTypes['id']
   ) {
     return {
       payload: {
-        text,
+        taskText: text,
         id,
         created,
         expireUntil,

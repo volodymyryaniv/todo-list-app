@@ -17,11 +17,11 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
 
     const currentItem = useAppSelector(selectAll).activeItem;
     const defaultId = currentItem?.id || '';
-    const defaultText = currentItem?.text || '';
+    const defaultText = currentItem?.taskText || '';
     const defaultCreated = currentItem?.created || '';
     const defaultExpiry = currentItem?.expireUntil || '';
 
-    const [text, setText] = useState<string>(defaultText);
+    const [taskText, setTaskText] = useState<string>(defaultText);
     const [created, setCreated] = useState<string>(defaultCreated);
     const [expire, setExpire] = useState<string>(defaultExpiry);
 
@@ -29,20 +29,20 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
 
     const onSubmitHandler = (e: SyntheticEvent): void => {
       e.preventDefault();
-      if (text.trim()) {
+      if (taskText.trim()) {
         if (!currentItem) {
-          dispatch(createTodo(text, created, expire));
+          dispatch(createTodo(taskText, created, expire));
           dispatch(setSortBy(categories[0]));
           dispatch(setScrollBottom());
           if (pathname !== '/active') {
             navigate('/');
           }
         } else {
-          dispatch(updateTodo(text, created, expire, defaultId))
+          dispatch(updateTodo(taskText, created, expire, defaultId))
           dispatch(setScrollToElem());
           dispatch(removeActiveTodo());
         }
-        setText('');
+        setTaskText('');
       }
       if (popupStatus) {
         dispatch(setPopup(false));
@@ -52,8 +52,8 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
     return (
       <WrappedComponent
         {...(props as T)}
-        text={text}
-        setText={setText}
+        taskText={taskText}
+        setTaskText={setTaskText}
         created={created}
         setCreated={setCreated}
         expire={expire}

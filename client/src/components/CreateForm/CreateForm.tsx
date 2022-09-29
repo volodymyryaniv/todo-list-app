@@ -8,7 +8,7 @@ import styles from './CreateForm.module.scss';
 
 const CreateForm = (props: withFormFullPropTypes) => {
   const { container, form, input, button } = styles;
-  const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
+  const { taskText, setTaskText, created, setCreated, expire, setExpire, onSubmit } = props;
 
   const currentItem = useAppSelector(selectAll).activeItem;
 
@@ -25,7 +25,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
   };
 
   const onSetTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    setTaskText(e.target.value);
   };
 
   const onSetExpireHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             className={input}
             type="text"
             placeholder="Enter your task"
-            value={text}
+            value={taskText}
             onChange={onSetTextHandler}
             required
           />

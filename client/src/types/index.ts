@@ -1,14 +1,14 @@
 export interface ToDoItemTypes {
   id: string;
-  text: string;
+  taskText: string;
   created: string;
   expireUntil: string;
   completed: boolean;
 }
 
 export interface withFormSimplePropTypes {
-  text: string;
-  setText: (value: string) => void;
+  taskText: string;
+  setTaskText: (value: string) => void;
   onSubmit: (value: React.SyntheticEvent) => void;
 }
 

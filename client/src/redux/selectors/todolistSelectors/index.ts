@@ -75,13 +75,13 @@ function sortList(list: TodoStateTypes['list'], order: string) {
 
     if (type === SortEnum.Asc) {
       if (orderBy === SortEnum.Text) {
-        return itemA.text.localeCompare(itemB.text);
+        return itemA.taskText.localeCompare(itemB.taskText);
       } else {
         return first > second ? 1 : -1;
       }
     } else {
       if (orderBy === SortEnum.Text) {
-        return itemB.text.localeCompare(itemA.text);
+        return itemB.taskText.localeCompare(itemA.taskText);
       } else {
         return first < second ? 1 : -1;
       }

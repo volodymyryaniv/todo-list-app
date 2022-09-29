@@ -1,0 +1,22 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.item {
+  @include text(1rem, 700);
+  list-style: none;
+  padding: 0.3rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  @media (min-width: 525px) {
+    font-size: 1.1rem;
+  }
+  &:hover {
+    color: $lightText;
+  }
+  .input {
+    display: none;
+  }
+}
+.active {
+  color: $toggleChecked;
+}
