@@ -25,7 +25,7 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
     const [created, setCreated] = useState<string>(defaultCreated);
     const [expire, setExpire] = useState<string>(defaultExpiry);
 
-    const popupStatus = useAppSelector(state => state.popupSlice);
+    const popupStatus = useAppSelector(state => state.popupSlice.open);
 
     const onSubmitHandler = (e: SyntheticEvent): void => {
       e.preventDefault();

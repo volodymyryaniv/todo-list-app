@@ -28,3 +28,8 @@ export interface SetSortTypes {
   sort: SortTypes;
   setSort: React.Dispatch<React.SetStateAction<SortTypes>>;
 }
+
+export interface SetSearchTypes {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+}
