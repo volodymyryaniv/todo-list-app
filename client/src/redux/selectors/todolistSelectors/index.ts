@@ -35,8 +35,7 @@ export const selectCompleted = createSelector(
 export const selectAllSortedList = createSelector(
   [selectList, orderBy],
   (list: TodoStateTypes['list'], order) => {
-    const newList = [...list];
-    return sortList(newList, order);
+    return sortList(list, order);
   },
   memoizeOptions
 );
@@ -44,8 +43,7 @@ export const selectAllSortedList = createSelector(
 export const selectActiveSortedList = createSelector(
   [selectActive, orderBy],
   (list: TodoStateTypes['list'], order) => {
-    const newList = [...list];
-    return sortList(newList, order);
+    return sortList(list, order);
   },
   memoizeOptions
 );
@@ -53,8 +51,7 @@ export const selectActiveSortedList = createSelector(
 export const selectCompletedSortedList = createSelector(
   [selectCompleted, orderBy],
   (list: TodoStateTypes['list'], order) => {
-    const newList = [...list];
-    return sortList(newList, order);
+    return sortList(list, order);
   },
   memoizeOptions
 );
@@ -68,7 +65,7 @@ function sortList(list: TodoStateTypes['list'], order: string) {
   const orderBy = arr[0].toString();
   const type = arr.at(-1);
 
-  return list.sort((itemA: ToDoType, itemB: ToDoType) => {
+  return [...list].sort((itemA: ToDoType, itemB: ToDoType) => {
     const first = new Date(itemA[orderBy as keyof ToDoType]);
     const second = new Date(itemB[orderBy as keyof ToDoType]);
     if (type === SortEnum.Asc) {
