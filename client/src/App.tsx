@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppSelector } from './hooks/redux-hooks';
-import SearchComponent from './modules/SearchComponent';
+import SearchComponent from './components/SearchComponent';
 import {
   selectState,
   selectAllSortedList,
