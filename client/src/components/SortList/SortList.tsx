@@ -4,25 +4,27 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { selectAll } from '../../redux/selectors/todolistSelectors';
 import { setSortBy } from '../../redux/slices/todoListSlice';
 import { SortTypes } from '../../types';
+import SortListItem from '../SortListItem';
 import styles from './SortList.module.scss';
 
 const SortList = () => {
-  const { wrapper, container, item, active, icon } = styles;
+  const { wrapper, container, icon } = styles;
 
   const ref = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
   const { title } = useAppSelector(selectAll).sortBy;
   const [showSort, setShowSort] = useState<boolean>(false);
 
-  useEffect(() => {
-    const closeSortList = (e: MouseEvent) => {
-      const path = e.composedPath();
-      if (ref.current) {
-        if (!path.includes(ref.current)) {
-          setShowSort(false);
-        }
+  const closeSortList = (e: MouseEvent) => {
+    const path = e.composedPath();
+    if (ref.current) {
+      if (!path.includes(ref.current)) {
+        setShowSort(false);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     document.body.addEventListener('click', closeSortList);
     return () => document.body.removeEventListener('click', closeSortList);
   }, []);
@@ -30,6 +32,10 @@ const SortList = () => {
   const onSortHandler = (category: SortTypes) => {
     dispatch(setSortBy(category));
     setShowSort(false);
+  };
+
+  const onShowSortHandler = () => {
+    setShowSort((prev) => !prev)
   };
 
   return (
@@ -40,28 +46,23 @@ const SortList = () => {
           className={icon}
           src="/icons/sort.png"
           alt="sort icon"
-          onClick={() => setShowSort((prev) => !prev)}
+          onClick={onShowSortHandler}
         />
       </div>
       {showSort && (
         <ul className={container}>
-          {categories.map((category) => {
-            return (
-              <li
-                className={
-                  category.title === title ? `${item} ${active}` : item
-                }
-                key={category.value}
-                onClick={() => onSortHandler(category)}
-              >
-                {category.title}
-              </li>
-            );
-          })}
+          {categories.map((category) => (
+            <SortListItem
+              key={category.value}
+              {...category}
+              onSortHandler={onSortHandler}
+            />
+          ))}
         </ul>
       )}
     </section>
   );
+
 };
 
 export default SortList;

@@ -8,7 +8,7 @@ import styles from './CreateForm.module.scss';
 
 const CreateForm = (props: withFormFullPropTypes) => {
   const { container, form, input, button } = styles;
-  const { text, setText, created, setCreated, expire, setExpire, onSubmit } = props;
+  const { taskText, setTaskText, created, setCreated, expire, setExpire, onSubmit } = props;
 
   const currentItem = useAppSelector(selectAll).activeItem;
 
@@ -24,6 +24,14 @@ const CreateForm = (props: withFormFullPropTypes) => {
     }
   };
 
+  const onSetTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setTaskText(e.target.value);
+  };
+
+  const onSetExpireHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setExpire(e.target.value);
+  };
+
   return (
     <section className={container}>
       <form className={form} onSubmit={onSubmit}>
@@ -33,8 +41,8 @@ const CreateForm = (props: withFormFullPropTypes) => {
             className={input}
             type="text"
             placeholder="Enter your task"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={taskText}
+            onChange={onSetTextHandler}
             required
           />
         </label>
@@ -46,7 +54,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             name="created"
             value={createdDate}
             min={minDate}
-            onChange={(e) => onSetDateHandler(e)}
+            onChange={onSetDateHandler}
           />
         </label>
         <label>
@@ -57,7 +65,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             name="expireUntil"
             value={expireDate}
             min={createdDate}
-            onChange={(e) => setExpire(e.target.value)}
+            onChange={onSetExpireHandler}
           />
         </label>
         <button className={button} type="submit">
