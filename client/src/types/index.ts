@@ -1,11 +1,8 @@
-export interface ToDoType {
+export interface ToDoItemTypes {
   id: string;
   text: string;
   created: string;
   expireUntil: string;
-}
-
-export interface ToDoItemTypes extends ToDoType {
   completed: boolean;
 }
 

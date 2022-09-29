@@ -1,4 +1,4 @@
-import { ToDoItemTypes, ToDoType } from './../../../types';
+import { ToDoItemTypes } from './../../../types';
 import { createSelector } from '@reduxjs/toolkit';
 import { SortEnum } from '../../../enums';
 import { TodoStateTypes } from '../../slices/todoListSlice';
@@ -65,9 +65,13 @@ function sortList(list: TodoStateTypes['list'], order: string) {
   const orderBy = arr[0].toString();
   const type = arr.at(-1);
 
-  return [...list].sort((itemA: ToDoType, itemB: ToDoType) => {
-    const first = new Date(itemA[orderBy as keyof ToDoType]);
-    const second = new Date(itemB[orderBy as keyof ToDoType]);
+  return [...list].sort((itemA: ToDoItemTypes, itemB: ToDoItemTypes) => {
+    const first = new Date(
+      itemA[orderBy as keyof Omit<ToDoItemTypes, 'completed'>]
+    );
+    const second = new Date(
+      itemB[orderBy as keyof Omit<ToDoItemTypes, 'completed'>]
+    );
     if (type === SortEnum.Asc) {
       if (orderBy === SortEnum.Text) {
         return itemA.text.localeCompare(itemB.text);
