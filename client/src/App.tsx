@@ -20,7 +20,8 @@ const App: FC = () => {
   const { value } = useAppSelector(selectAll).sortBy;
 
   const [search, setSearch] = useState<string>('');
-  const { isError, errorMessage } = validateInput(search);
+  const { isError, errorMessage, validationPatern } = validateInput(search);
+  const searchValue = isError ? search.split(validationPatern)[0] : search;
 
   const state = useAppSelector(selectState);
   const list = selectAllSortedList(state, value);
@@ -41,28 +42,16 @@ const App: FC = () => {
           <Route path="/*" element={<AddNewTodo />}>
             <Route
               index
-              element={
-                <ToDoList list={list} searchValue={search} isError={isError} />
-              }
+              element={<ToDoList list={list} searchValue={searchValue} />}
             />
             <Route
               path="active"
-              element={
-                <ToDoList
-                  list={listActive}
-                  searchValue={search}
-                  isError={isError}
-                />
-              }
+              element={<ToDoList list={listActive} searchValue={searchValue} />}
             />
             <Route
               path="completed"
               element={
-                <ToDoList
-                  list={listCompleted}
-                  searchValue={search}
-                  isError={isError}
-                />
+                <ToDoList list={listCompleted} searchValue={searchValue} />
               }
             />
           </Route>
@@ -71,6 +60,7 @@ const App: FC = () => {
       </div>
     </div>
   );
+
 };
 
 export default App;

@@ -1,5 +1,5 @@
 import { useRef, useEffect, FC, useState, useDeferredValue, useMemo } from 'react';
-import { ToDoItemTypes, withFormSimplePropTypes } from '../../types';
+import { ToDoItemTypes } from '../../types';
 import { useAppSelector } from '@hooks/redux-hooks';
 import { TodoListType } from '@slices/todoListSlice';
 import { selectAllScrolls } from '@selectors/scrollSelectors';
@@ -9,12 +9,11 @@ import styles from './ToDoList.module.scss';
 
 interface SearchStrType {
   searchValue: string;
-  isError: withFormSimplePropTypes['isError'];
 }
 
 const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
   const { wrapper, container, fallback } = styles;
-  const { list, searchValue, isError } = props;
+  const { list, searchValue } = props;
   const defferedSearchValue = useDeferredValue(searchValue);
 
   const listRef = useRef<HTMLDivElement>(null);
@@ -22,7 +21,7 @@ const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
   const { scrollBottom, scrollTop, scrollToElem } = useAppSelector(selectAllScrolls);
 
   const filteredMemoList = useMemo(() => {
-    return filterList(list, defferedSearchValue, isError);
+    return filterList(list, defferedSearchValue);
   }, [defferedSearchValue, list]);
 
   useEffect(() => {

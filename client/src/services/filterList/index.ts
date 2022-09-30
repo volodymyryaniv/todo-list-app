@@ -1,14 +1,7 @@
 import { ToDoItemTypes } from '../../types';
 
-export const filterList = (
-  list: ToDoItemTypes[],
-  value: string,
-  isError: boolean
-) => {
+export const filterList = (list: ToDoItemTypes[], value: string) => {
   return list.filter((item: ToDoItemTypes) => {
-    const searchValue = isError ? value.split(/(&|\*|\$)/)[0] : value;
-    return item.taskText
-      .toLowerCase()
-      .includes(searchValue.trim().toLowerCase());
+    return item.taskText.toLowerCase().includes(value.trim().toLowerCase());
   });
 };
