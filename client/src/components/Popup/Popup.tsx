@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { removeActiveTodo } from '../../redux/slices/todoListSlice';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
-import { setPopup } from '../../redux/slices/popupSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { removeActiveTodo } from '@slices/todoListSlice';
+import { selectAll } from '@selectors/todolistSelectors';
+import { setPopup } from '@slices/popupSlice';
 import styles from './Popup.module.scss';
 
 interface ModalProps {

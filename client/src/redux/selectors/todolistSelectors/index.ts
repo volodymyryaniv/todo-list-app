@@ -1,8 +1,8 @@
 import { ToDoItemTypes } from './../../../types';
 import { createSelector } from '@reduxjs/toolkit';
-import { TodoStateTypes } from '../../slices/todoListSlice';
-import { RootState } from '../../store';
-import { sortList } from '../../../services/sortList';
+import { TodoStateTypes } from '@slices/todoListSlice';
+import { RootState } from '@redux/store';
+import { sortList } from '@services/sortList';
 
 const memoizeOptions = {
   memoizeOptions: {

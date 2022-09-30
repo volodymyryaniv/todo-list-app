@@ -1,8 +1,8 @@
 import { SyntheticEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/redux-hooks';
-import { setScrollTop } from '../../redux/slices/scrollSlice';
-import { clearCompletedTodo } from '../../redux/slices/todoListSlice';
+import { useAppDispatch } from '@hooks/redux-hooks';
+import { setScrollTop } from '@slices/scrollSlice';
+import { clearCompletedTodo } from '@slices/todoListSlice';
 import styles from './NavBar.module.scss';
 
 export default function NavBar() {

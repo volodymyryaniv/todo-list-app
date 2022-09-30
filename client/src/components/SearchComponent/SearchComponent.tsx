@@ -1,17 +1,20 @@
 import { ChangeEvent } from 'react';
-import { SetSearchTypes } from '../../types';
+import { SetSearchTypes, withFormSimplePropTypes } from '../../types';
 import styles from './SearchComponent.module.scss';
 
-export default function SearchComponent(props: SetSearchTypes) {
-  const { container, input, icon, clear } = styles;
-  const { search, setSearch } = props;
+const SearchComponent = (
+  props: SetSearchTypes &
+    Pick<withFormSimplePropTypes, 'errorMessage' | 'isError'>
+) => {
+  const { container, input, icon, clear, error } = styles;
+  const { search, setSearch, isError, errorMessage } = props;
 
   const onClearSearch = (): void => {
     setSearch('');
-  }
+  };
 
   const onSetSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value);
   };
 
   return (
@@ -23,11 +26,8 @@ export default function SearchComponent(props: SetSearchTypes) {
         value={search}
         onChange={onSetSearchHandler}
       />
-      <img
-        className={icon}
-        src="/icons/search.png"
-        alt="cross icon"
-      />
+      {isError && <p className={error}>{errorMessage}</p>}
+      <img className={icon} src="/icons/search.png" alt="cross icon" />
       <img
         className={clear}
         src="/icons/clear.png"
@@ -35,5 +35,7 @@ export default function SearchComponent(props: SetSearchTypes) {
         onClick={onClearSearch}
       />
     </article>
-  )
-}
+  );
+};
+
+export default SearchComponent;

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { categories } from '../../assets/sortByList';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
-import { setSortBy } from '../../redux/slices/todoListSlice';
+import { categories } from '@assets/sortByList';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { selectAll } from '@selectors/todolistSelectors';
+import { setSortBy } from '@slices/todoListSlice';
 import { SortTypes } from '../../types';
 import SortListItem from '../SortListItem';
 import styles from './SortList.module.scss';
@@ -62,7 +62,6 @@ const SortList = () => {
       )}
     </section>
   );
-
 };
 
 export default SortList;

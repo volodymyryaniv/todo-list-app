@@ -1,13 +1,14 @@
 import { useState, ComponentType, SyntheticEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
-import { createTodo, updateTodo } from '../redux/actions/todoListActions';
-import { setScrollToElem, setScrollBottom } from '../redux/slices/scrollSlice';
-import { selectAll } from '../redux/selectors/todolistSelectors';
-import { setPopup } from '../redux/slices/popupSlice';
-import { removeActiveTodo, setSortBy } from '../redux/slices/todoListSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { createTodo, updateTodo } from '@actions/todoListActions';
+import { setScrollToElem, setScrollBottom } from '@slices/scrollSlice';
+import { selectAll } from '@selectors/todolistSelectors';
+import { setPopup } from '@slices/popupSlice';
+import { removeActiveTodo, setSortBy } from '@slices/todoListSlice';
+import { validateInput } from '@services/inputValidation';
 import { withFormFullPropTypes } from '../types';
-import { categories } from '../assets/sortByList';
+import { categories } from '@assets/sortByList';
 
 export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof withFormFullPropTypes>) => {
@@ -26,26 +27,29 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
     const [expire, setExpire] = useState<string>(defaultExpiry);
 
     const popupStatus = useAppSelector(state => state.popupSlice.open);
+    const { isError, errorMessage } = validateInput(taskText);
 
     const onSubmitHandler = (e: SyntheticEvent): void => {
       e.preventDefault();
-      if (taskText.trim()) {
-        if (!currentItem) {
-          dispatch(createTodo(taskText, created, expire));
-          dispatch(setSortBy(categories[0]));
-          dispatch(setScrollBottom());
-          if (pathname !== '/active') {
-            navigate('/');
+      if (!isError) {
+        if (taskText.trim()) {
+          if (!currentItem) {
+            dispatch(createTodo(taskText, created, expire));
+            dispatch(setSortBy(categories[0]));
+            dispatch(setScrollBottom());
+            if (pathname !== '/active') {
+              navigate('/');
+            }
+          } else {
+            dispatch(updateTodo(taskText, created, expire, defaultId))
+            dispatch(setScrollToElem());
+            dispatch(removeActiveTodo());
           }
-        } else {
-          dispatch(updateTodo(taskText, created, expire, defaultId))
-          dispatch(setScrollToElem());
-          dispatch(removeActiveTodo());
+          setTaskText('');
         }
-        setTaskText('');
-      }
-      if (popupStatus) {
-        dispatch(setPopup(false));
+        if (popupStatus) {
+          dispatch(setPopup(false));
+        }
       }
     };
 
@@ -59,6 +63,8 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
         expire={expire}
         setExpire={setExpire}
         onSubmit={onSubmitHandler}
+        isError={isError}
+        errorMessage={errorMessage}
       />
     );
   };

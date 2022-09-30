@@ -1,8 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createTodo, updateTodo } from '../../actions/todoListActions';
+import { createTodo, updateTodo } from '@actions/todoListActions';
 import { SortTypes, ToDoItemTypes } from '../../../types/index.js';
-import { categories } from '../../../assets/sortByList';
+import { categories } from '@assets/sortByList';
 
 export interface TodoListType {
   list: ToDoItemTypes[];

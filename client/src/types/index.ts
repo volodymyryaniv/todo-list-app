@@ -10,6 +10,8 @@ export interface withFormSimplePropTypes {
   taskText: string;
   setTaskText: (value: string) => void;
   onSubmit: (value: React.SyntheticEvent) => void;
+  isError: boolean;
+  errorMessage: string;
 }
 
 export interface withFormFullPropTypes extends withFormSimplePropTypes {

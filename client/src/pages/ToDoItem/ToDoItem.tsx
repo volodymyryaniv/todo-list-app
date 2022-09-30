@@ -1,14 +1,14 @@
 import { FC, useRef, Dispatch, SetStateAction } from 'react';
-import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useAppDispatch } from '@hooks/redux-hooks';
 import {
   setTodoStatus,
   removeTodo,
   setActiveTodo,
-} from '../../redux/slices/todoListSlice';
+} from '@slices/todoListSlice';
 import { ToDoItemTypes } from '../../types';
-import { formatDisplayDate } from '../../services/formatDate';
-import { setPopup } from '../../redux/slices/popupSlice';
-import ToggleButton from '../../components/ToggleButton';
+import { formatDisplayDate } from '@services/formatDate';
+import { setPopup } from '@slices/popupSlice';
+import ToggleButton from '@components/ToggleButton';
 import styles from './ToDoItem.module.scss';
 
 interface ItemPositionTypes {

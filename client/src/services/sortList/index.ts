@@ -1,5 +1,5 @@
 import { SortEnum } from '../../enums';
-import { TodoStateTypes } from '../../redux/slices/todoListSlice';
+import { TodoStateTypes } from '@slices/todoListSlice';
 import { ToDoItemTypes } from '../../types';
 
 export const sortList = (list: TodoStateTypes['list'], order: string) => {

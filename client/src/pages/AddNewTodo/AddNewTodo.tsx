@@ -1,17 +1,17 @@
 import { ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Outlet } from 'react-router-dom';
-import { setPopup } from '../../redux/slices/popupSlice';
-import withFormSubmit from '../../hocs/withFormSubmit';
-import Popup from '../../components/Popup';
-import CreateForm from '../../components/CreateForm';
-import SortList from '../../components/SortList';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { setPopup } from '@slices/popupSlice';
+import withFormSubmit from '@hocs/withFormSubmit';
+import Popup from '@components/Popup';
+import CreateForm from '@components/CreateForm';
+import SortList from '@components/SortList';
 import { withFormSimplePropTypes } from '../../types';
 import styles from './AddNewTodo.module.scss';
 
 const AddNewTodo = (props: withFormSimplePropTypes) => {
-  const { taskText, setTaskText, onSubmit } = props;
-  const { container, form, input, icon } = styles;
+  const { taskText, setTaskText, onSubmit, isError, errorMessage } = props;
+  const { container, form, input, icon, error } = styles;
 
   const open = useAppSelector((state) => state.popupSlice.open);
   const dispatch = useAppDispatch();
@@ -36,6 +36,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
             value={taskText}
             onChange={onSetTextHandler}
           />
+          {isError && <p className={error}>{errorMessage}</p>}
         </form>
         <img
           className={icon}
