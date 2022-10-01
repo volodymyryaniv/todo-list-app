@@ -7,9 +7,10 @@ import Popup from '@components/Popup';
 import CreateForm from '@components/CreateForm';
 import SortList from '@components/SortList';
 import { withFormSimplePropTypes } from '../../types';
-import styles from './AddNewTodo.module.scss';
+import addIcon from '@assets/icons/add.svg';
+import styles from './CreatingTask.module.scss';
 
-const AddNewTodo = (props: withFormSimplePropTypes) => {
+const CreatingTask = (props: withFormSimplePropTypes) => {
   const { taskText, setTaskText, onSubmit, isError, errorMessage } = props;
   const { container, form, input, icon, error } = styles;
 
@@ -40,7 +41,7 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
         </form>
         <img
           className={icon}
-          src="/icons/add.svg"
+          src={addIcon}
           alt="cross icon"
           onClick={onClickHandler}
         />
@@ -51,4 +52,4 @@ const AddNewTodo = (props: withFormSimplePropTypes) => {
   );
 };
 
-export default withFormSubmit(AddNewTodo);
+export default withFormSubmit(CreatingTask);

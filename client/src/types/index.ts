@@ -1,4 +1,4 @@
-export interface ToDoItemTypes {
+export interface TaskCardTypes {
   id: string;
   taskText: string;
   created: string;

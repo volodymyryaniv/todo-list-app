@@ -1,8 +1,10 @@
 import { ChangeEvent } from 'react';
 import { SetSearchTypes, withFormSimplePropTypes } from '../../types';
-import styles from './SearchComponent.module.scss';
+import clearIcon from '@assets/icons/clear.png';
+import searchIcon from '@assets/icons/search.png';
+import styles from './Search.module.scss';
 
-const SearchComponent = (
+const Search = (
   props: SetSearchTypes &
     Pick<withFormSimplePropTypes, 'errorMessage' | 'isError'>
 ) => {
@@ -27,10 +29,10 @@ const SearchComponent = (
         onChange={onSetSearchHandler}
       />
       {isError && <p className={error}>{errorMessage}</p>}
-      <img className={icon} src="/icons/search.png" alt="cross icon" />
+      <img className={icon} src={searchIcon} alt="cross icon" />
       <img
         className={clear}
-        src="/icons/clear.png"
+        src={clearIcon}
         alt="cross icon"
         onClick={onClearSearch}
       />
@@ -38,4 +40,4 @@ const SearchComponent = (
   );
 };
 
-export default SearchComponent;
+export default Search;

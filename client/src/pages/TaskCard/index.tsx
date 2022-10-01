@@ -1,21 +1,23 @@
 import { FC, useRef, Dispatch, SetStateAction } from 'react';
 import { useAppDispatch } from '@hooks/redux-hooks';
 import {
-  setTodoStatus,
-  removeTodo,
-  setActiveTodo,
-} from '@slices/todoListSlice';
-import { ToDoItemTypes } from '../../types';
+  setTaskStatus,
+  removeTask,
+  setActiveTask,
+} from '@slices/taskListSlice';
+import { TaskCardTypes } from '../../types';
 import { formatDisplayDate } from '@services/formatDate';
 import { setPopup } from '@slices/popupSlice';
 import ToggleButton from '@components/ToggleButton';
-import styles from './ToDoItem.module.scss';
+import editIcon from '@assets/icons/edit.png';
+import deleteIcon from '@assets/icons/delete.svg';
+import styles from './TaskCard.module.scss';
 
 interface ItemPositionTypes {
   setPosition: Dispatch<SetStateAction<number>>;
 }
 
-const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
+const TaskCard: FC<TaskCardTypes & ItemPositionTypes> = (props) => {
   const { container, content, mainInfo, details, dateBlock, buttonsBlock } =
     styles;
   const { id, taskText, created, expireUntil, completed, setPosition } = props;
@@ -24,7 +26,7 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const formatClassNames = (
-    status: ToDoItemTypes['completed'],
+    status: TaskCardTypes['completed'],
     name: string
   ): string => {
     return status ? `${styles[name]} ${styles.done}` : `${styles[name]}`;
@@ -38,17 +40,17 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   const titleStyle = formatClassNames(completed, 'title');
 
   const onSetStatusHandler = () => {
-    dispatch(setTodoStatus(id));
+    dispatch(setTaskStatus(id));
   };
 
   const onEditHandler = () => {
     setPosition(itemRef.current?.offsetTop || 0);
-    dispatch(setActiveTodo(id));
+    dispatch(setActiveTask(id));
     dispatch(setPopup(true));
   };
 
   const onRemoveHandler = () => {
-    dispatch(removeTodo(id));
+    dispatch(removeTask(id));
   };
 
   return (
@@ -74,12 +76,12 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
       </div>
       <div className={buttonsBlock}>
         <img
-          src="/icons/delete.svg"
+          src={deleteIcon}
           alt="delete icon"
           onClick={onRemoveHandler}
         />
         <img
-          src="/icons/edit.png"
+          src={editIcon}
           alt="delete icon"
           onClick={onEditHandler}
         />
@@ -88,4 +90,4 @@ const ToDoItem: FC<ToDoItemTypes & ItemPositionTypes> = (props) => {
   );
 };
 
-export default ToDoItem;
+export default TaskCard;

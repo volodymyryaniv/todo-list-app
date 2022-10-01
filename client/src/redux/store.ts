@@ -9,16 +9,16 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import todoListReducer from './slices/todoListSlice';
+import taskListReducer from './slices/taskListSlice';
 import scrollSliceReducer from './slices/scrollSlice';
 import popupSlice from './slices/popupSlice';
-import { todoListPersistConfig } from './persistConfig';
-import { TodoStateTypes } from './slices/todoListSlice';
+import { taskListPersistConfig } from './persistConfig';
+import { TaskStateTypes } from './slices/taskListSlice';
 
 const rootReducer = combineReducers({
-  todoListReducer: persistReducer<TodoStateTypes>(
-    todoListPersistConfig,
-    todoListReducer
+  taskListReducer: persistReducer<TaskStateTypes>(
+    taskListPersistConfig,
+    taskListReducer
   ),
   popupSlice,
   scrollSliceReducer,

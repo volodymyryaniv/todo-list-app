@@ -1,18 +1,18 @@
 import { createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { ToDoItemTypes } from '../types';
+import { TaskCardTypes } from '../types';
 
 const TransformCredentials = createTransform(
-  (inboundState: ToDoItemTypes): string => {
+  (inboundState: TaskCardTypes): string => {
     return JSON.stringify(inboundState);
   },
-  (outboundState: string): ToDoItemTypes => {
+  (outboundState: string): TaskCardTypes => {
     return JSON.parse(outboundState);
   }
 );
 
-export const todoListPersistConfig = {
-  key: 'todoList',
+export const taskListPersistConfig = {
+  key: 'taskList',
   storage,
   whitelist: ['list'],
   transforms: [TransformCredentials],

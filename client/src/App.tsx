@@ -1,18 +1,18 @@
 import { FC, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useAppSelector } from './hooks/redux-hooks';
+import { useAppSelector } from '@hooks/redux-hooks';
 import {
   selectState,
   selectAllSortedList,
   selectActiveSortedList,
   selectCompletedSortedList,
   selectAll,
-} from './redux/selectors/todolistSelectors';
+} from '@selectors/taskListSelectors';
 import { validateInput } from '@services/inputValidation';
-import SearchComponent from './components/SearchComponent';
-import AddNewTodo from './pages/AddNewTodo';
-import NavBar from './pages/NavBar';
-import ToDoList from './pages/ToDoList';
+import Search from '@components/Search';
+import CreatingTask from '@pages/CreatingTask';
+import Navigation from '@pages/Navigation';
+import Tasks from '@pages/Tasks';
 import styles from './App.module.scss';
 
 const App: FC = () => {
@@ -32,35 +32,34 @@ const App: FC = () => {
     <div className={wrapper}>
       <div className={container}>
         <h1 className={title}>Todo</h1>
-        <SearchComponent
+        <Search
           search={search}
           setSearch={setSearch}
           errorMessage={errorMessage}
           isError={isError}
         />
         <Routes>
-          <Route path="/*" element={<AddNewTodo />}>
+          <Route path="/*" element={<CreatingTask />}>
             <Route
               index
-              element={<ToDoList list={list} searchValue={searchValue} />}
+              element={<Tasks list={list} searchValue={searchValue} />}
             />
             <Route
               path="active"
-              element={<ToDoList list={listActive} searchValue={searchValue} />}
+              element={<Tasks list={listActive} searchValue={searchValue} />}
             />
             <Route
               path="completed"
               element={
-                <ToDoList list={listCompleted} searchValue={searchValue} />
+                <Tasks list={listCompleted} searchValue={searchValue} />
               }
             />
           </Route>
         </Routes>
-        <NavBar />
+        <Navigation />
       </div>
     </div>
   );
-
 };
 
 export default App;

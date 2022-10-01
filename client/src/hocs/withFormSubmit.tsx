@@ -1,14 +1,14 @@
 import { useState, ComponentType, SyntheticEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
-import { createTodo, updateTodo } from '@actions/todoListActions';
+import { createTask, updateTask } from '@redux/actions/taskListActions';
 import { setScrollToElem, setScrollBottom } from '@slices/scrollSlice';
-import { selectAll } from '@selectors/todolistSelectors';
+import { selectAll } from '@redux/selectors/taskListSelectors';
 import { setPopup } from '@slices/popupSlice';
-import { removeActiveTodo, setSortBy } from '@slices/todoListSlice';
+import { removeActiveTask, setSortBy } from '@slices/taskListSlice';
 import { validateInput } from '@services/inputValidation';
 import { withFormFullPropTypes } from '../types';
-import { categories } from '@assets/sortByList';
+import { categories } from 'config/sortByList';
 
 export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof withFormFullPropTypes>) => {
@@ -34,16 +34,16 @@ export default function withFormSubmit<T>(WrappedComponent: ComponentType<T>) {
       if (!isError) {
         if (taskText.trim()) {
           if (!currentItem) {
-            dispatch(createTodo(taskText, created, expire));
+            dispatch(createTask(taskText, created, expire));
             dispatch(setSortBy(categories[0]));
             dispatch(setScrollBottom());
             if (pathname !== '/active') {
               navigate('/');
             }
           } else {
-            dispatch(updateTodo(taskText, created, expire, defaultId))
+            dispatch(updateTask(taskText, created, expire, defaultId))
             dispatch(setScrollToElem());
-            dispatch(removeActiveTodo());
+            dispatch(removeActiveTask());
           }
           setTaskText('');
         }

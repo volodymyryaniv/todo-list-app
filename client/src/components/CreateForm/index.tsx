@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import { useAppSelector } from '@hooks/redux-hooks';
 import withFormSubmit from '@hocs/withFormSubmit';
-import { selectAll } from '@selectors/todolistSelectors';
+import { selectAll } from '@redux/selectors/taskListSelectors';
 import { formatFormDate } from '@services/formatDate';
 import { withFormFullPropTypes } from '../../types';
 import styles from './CreateForm.module.scss';

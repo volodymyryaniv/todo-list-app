@@ -2,10 +2,10 @@ import { SyntheticEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@hooks/redux-hooks';
 import { setScrollTop } from '@slices/scrollSlice';
-import { clearCompletedTodo } from '@slices/todoListSlice';
-import styles from './NavBar.module.scss';
+import { clearCompletedTasks } from '@slices/taskListSlice';
+import styles from './Navigation.module.scss';
 
-export default function NavBar() {
+export default function Navigation() {
   const { container, linkContainer, title, disabled, active, clearAll } =
     styles;
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ export default function NavBar() {
   };
 
   const clearCompletedHandler = () => {
-    dispatch(clearCompletedTodo());
+    dispatch(clearCompletedTasks());
   };
 
   return (

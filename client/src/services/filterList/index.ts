@@ -1,7 +1,7 @@
-import { ToDoItemTypes } from '../../types';
+import { TaskCardTypes } from '../../types';
 
-export const filterList = (list: ToDoItemTypes[], value: string) => {
-  return list.filter((item: ToDoItemTypes) => {
+export const filterList = (list: TaskCardTypes[], value: string) => {
+  return list.filter((item: TaskCardTypes) => {
     return item.taskText.toLowerCase().includes(value.trim().toLowerCase());
   });
 };

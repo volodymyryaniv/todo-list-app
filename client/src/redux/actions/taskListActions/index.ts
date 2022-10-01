@@ -1,12 +1,12 @@
 import { createAction, nanoid } from '@reduxjs/toolkit';
-import { ToDoItemTypes } from '../../../types/index.js';
+import { TaskCardTypes } from '../../../types/index.js';
 
-export const createTodo = createAction(
-  'createTodo',
+export const createTask = createAction(
+  'createTask',
   function prepare(
-    taskText: ToDoItemTypes['taskText'],
-    created?: ToDoItemTypes['created'],
-    expireUntil?: ToDoItemTypes['expireUntil']
+    taskText: TaskCardTypes['taskText'],
+    created?: TaskCardTypes['created'],
+    expireUntil?: TaskCardTypes['expireUntil']
   ) {
     const date = new Date();
     const dateDefault = created
@@ -27,13 +27,13 @@ export const createTodo = createAction(
   }
 );
 
-export const updateTodo = createAction(
-  'updateTodo',
+export const updateTask = createAction(
+  'updateTask',
   function prepare(
-    taskText: ToDoItemTypes['taskText'],
-    created: ToDoItemTypes['created'],
-    expireUntil: ToDoItemTypes['expireUntil'],
-    id: ToDoItemTypes['id']
+    taskText: TaskCardTypes['taskText'],
+    created: TaskCardTypes['created'],
+    expireUntil: TaskCardTypes['expireUntil'],
+    id: TaskCardTypes['id']
   ) {
     return {
       payload: {
