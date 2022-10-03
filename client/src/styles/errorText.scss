@@ -1,0 +1,9 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+.error {
+  @include text(0.8rem, 400, $errorText);
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}

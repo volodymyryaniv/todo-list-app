@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../hooks/redux-hooks';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
+import { useAppSelector } from '@hooks/redux-hooks';
+import { selectAll } from '@redux/selectors/taskListSelectors';
 import { SortTypes } from '../../types';
 import styles from './SortListItem.module.scss';
 

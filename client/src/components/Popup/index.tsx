@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { removeActiveTodo } from '../../redux/slices/todoListSlice';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
-import { setPopup } from '../../redux/slices/popupSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { removeActiveTask } from '@slices/taskListSlice';
+import { selectAll } from '@redux/selectors/taskListSelectors';
+import { setPopup } from '@slices/popupSlice';
 import styles from './Popup.module.scss';
 
 interface ModalProps {
@@ -27,7 +27,7 @@ const Popup = ({ children }: ModalProps) => {
       if (e.key === 'Escape') {
         dispatch(setPopup(false));
         if (currentItem) {
-          dispatch(removeActiveTodo())
+          dispatch(removeActiveTask())
         }
       }
     }
@@ -37,7 +37,7 @@ const Popup = ({ children }: ModalProps) => {
 
   const onClosePopupHandler = () => {
     dispatch(setPopup(false));
-    dispatch(removeActiveTodo())
+    dispatch(removeActiveTask())
   }
 
   return ReactDOM.createPortal(

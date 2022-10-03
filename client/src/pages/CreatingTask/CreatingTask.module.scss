@@ -1,5 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/errorText.scss';
 
 .container {
   @include flex(space-between, center);
@@ -7,6 +8,7 @@
   padding: 0.5rem 0 1.2rem 0;
   .form {
     flex: 1 1 auto;
+    position: relative;
     .input {
       width: 100%;
       padding: 0.8rem;

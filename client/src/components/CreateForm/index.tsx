@@ -1,14 +1,24 @@
 import { ChangeEvent } from 'react';
-import { useAppSelector } from '../../hooks/redux-hooks';
-import withFormSubmit from '../../hocs/withFormSubmit';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
+import { useAppSelector } from '@hooks/redux-hooks';
+import withFormSubmit from '@hocs/withFormSubmit';
+import { selectAll } from '@redux/selectors/taskListSelectors';
+import { formatFormDate } from '@services/formatDate';
 import { withFormFullPropTypes } from '../../types';
-import { formatFormDate } from '../../services/formatDate';
 import styles from './CreateForm.module.scss';
 
 const CreateForm = (props: withFormFullPropTypes) => {
-  const { container, form, input, button } = styles;
-  const { taskText, setTaskText, created, setCreated, expire, setExpire, onSubmit } = props;
+  const { container, form, input, button, error } = styles;
+  const {
+    taskText,
+    setTaskText,
+    created,
+    setCreated,
+    expire,
+    setExpire,
+    onSubmit,
+    errorMessage,
+    isError,
+  } = props;
 
   const currentItem = useAppSelector(selectAll).activeItem;
 
@@ -46,6 +56,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             required
           />
         </label>
+        {isError && <p className={error}>{errorMessage}</p>}
         <label>
           Created date
           <input
@@ -68,7 +79,7 @@ const CreateForm = (props: withFormFullPropTypes) => {
             onChange={onSetExpireHandler}
           />
         </label>
-        <button className={button} type="submit">
+        <button className={button} type="submit" disabled={isError}>
           Save
         </button>
       </form>

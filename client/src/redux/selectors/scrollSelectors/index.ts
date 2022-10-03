@@ -1,5 +1,5 @@
-import { ScrollStateTypes } from '../../slices/scrollSlice';
-import { RootState } from '../../store';
+import { ScrollStateTypes } from '@slices/scrollSlice';
+import { RootState } from '@redux/store';
 
 export const selectAllScrolls = (state: RootState): ScrollStateTypes =>
   state.scrollSliceReducer;

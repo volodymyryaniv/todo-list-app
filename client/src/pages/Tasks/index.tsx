@@ -1,17 +1,17 @@
 import { useRef, useEffect, FC, useState, useDeferredValue, useMemo } from 'react';
-import { ToDoItemTypes } from '../../types';
-import { useAppSelector } from '../../hooks/redux-hooks';
-import { TodoListType } from '../../redux/slices/todoListSlice';
-import { selectAllScrolls } from '../../redux/selectors/scrollSelectors';
-import { filterList } from '../../services/filterList';
-import ToDoItem from '../ToDoItem';
-import styles from './ToDoList.module.scss';
+import { TaskCardTypes } from '../../types';
+import { useAppSelector } from '@hooks/redux-hooks';
+import { TaskListType } from '@slices/taskListSlice';
+import { selectAllScrolls } from '@selectors/scrollSelectors';
+import { filterList } from '@services/filterList';
+import TaskCard from '../TaskCard';
+import styles from './Tasks.module.scss';
 
 interface SearchStrType {
   searchValue: string;
 }
 
-const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
+const Tasks: FC<TaskListType & SearchStrType> = (props) => {
   const { wrapper, container, fallback } = styles;
   const { list, searchValue } = props;
   const defferedSearchValue = useDeferredValue(searchValue);
@@ -41,8 +41,8 @@ const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
     <section className={wrapper}>
       <div ref={listRef} className={container}>
         {list.length ? (
-          filteredMemoList.map((item: ToDoItemTypes) => {
-            return <ToDoItem key={item.id} {...item} setPosition={setPosition} />;
+          filteredMemoList.map((item: TaskCardTypes) => {
+            return <TaskCard key={item.id} {...item} setPosition={setPosition} />;
           })
         ) : (
           <div className={fallback}>
@@ -52,7 +52,6 @@ const ToDoList: FC<TodoListType & SearchStrType> = (props) => {
       </div>
     </section>
   );
-
 };
 
-export default ToDoList;
+export default Tasks;

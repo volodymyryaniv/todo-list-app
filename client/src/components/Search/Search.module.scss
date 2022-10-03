@@ -1,8 +1,10 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
+@import '../../styles/errorText.scss';
 
 .container {
   position: relative;
+  margin-bottom: 0.8rem;
   .input {
     width: 100%;
     padding: 0.8rem 3rem;

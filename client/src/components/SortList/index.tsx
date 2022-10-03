@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { categories } from '../../assets/sortByList';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { selectAll } from '../../redux/selectors/todolistSelectors';
-import { setSortBy } from '../../redux/slices/todoListSlice';
+import { categories } from 'config/sortByList';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
+import { selectAll } from '@redux/selectors/taskListSelectors';
+import { setSortBy } from '@slices/taskListSlice';
 import { SortTypes } from '../../types';
 import SortListItem from '../SortListItem';
+import sortIcon from '@assets/icons/sort.png';
 import styles from './SortList.module.scss';
 
 const SortList = () => {
@@ -44,7 +45,7 @@ const SortList = () => {
         <p>{title}:</p>
         <img
           className={icon}
-          src="/icons/sort.png"
+          src={sortIcon}
           alt="sort icon"
           onClick={onShowSortHandler}
         />
@@ -62,7 +63,6 @@ const SortList = () => {
       )}
     </section>
   );
-
 };
 
 export default SortList;

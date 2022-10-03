@@ -6,13 +6,18 @@
     text-align: center;
     label {
       @include text(1rem, 700, $buttonHoverColor);
+      position: relative;
       .input {
         width: 100%;
         padding: 0.8rem;
         border: 1px solid $mediumText;
         border-radius: 0.3rem;
-        margin: 0.5rem 0;
+        margin-top: 1rem;
       }
+    }
+    .error {
+      @include text(0.8rem, 400, $errorText);
+      text-align: left;
     }
     .button {
       width: 100%;
@@ -25,6 +30,10 @@
         background-color: $buttonHoverColor;
         color: $lightText;
         transition: all 0.3s ease-in;
+      }
+      &:disabled {
+        color: $lightText;
+        pointer-events: none;
       }
     }
   }
